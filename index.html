@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rakenne</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+   <div class="header-top">
+        <div class="left-section">
+
+            <div class="logo">
+                <img src="logo.jpg" alt="rakenne">
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+            </div>
+
+        </div>
+
+        <div class="header-icons">
+
+    <div id="authBtn" onclick="openAuth()">Authorization</div>
+
+    <div class="icon heart-top" onclick="toggleFavoritesModal()">
+                <svg viewBox="0 0 24 24" stroke-width="2">
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+                </svg>
+            </div>
+
+    <div class="icon">
+                <svg viewBox="0 0 24 24" stroke-width="2">
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="17" cy="20" r="1"></circle>
+                    <path d="M1 1h4l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L23 6H6"></path>
+                </svg>
+            </div>
+
+    <div id="adminPanelBtn" style="display:none;" onclick="showUsers()">
+    👑 Admin Panel
+</div>
+
+    <div id="logoutBtn" style="display:none;" onclick="logout()">
+        Logout
+    </div>
+
+</div>
+
+        </div>
+    </div>
+
+    <div class="header-bottom">
+        <a href="#">Books</a>
+        <a href="#">Content</a>
+        <a href="#">Categories</a>
+        <a href="#">Media</a>
+        <button id="usersBtn" style="display:none;" onclick="showUsers()">Users</button>
+    </div>
+
+    <div class="ad-slider">
+    <div class="slides">
+        <div class="slide active">
+            <img src="ad1.png">
+        </div>
+        <div class="slide">
+            <img src="ad2.png">
+        </div>
+        <div class="slide">
+            <img src="ad3.png">
+        </div>
+    </div>
+
+    <div class="dots"></div>
+</div>
+
+
+    <div class="main">
+
+    <div class="section">
+        <div class="background-title">Bestsellers</div>
+        <div class="books-row"></div>
+    </div>
+
+    <div class="section novelty-section">
+    <div class="novelty-title">Novelty</div>
+    <div class="books-row novelty-row"></div>
+</div>
+
+<div class="section">
+    <div class="novelty-title">Fiction</div>
+    <div class="books-row fiction-row"></div>
+</div>
+
+<div class="section">
+    <div class="novelty-title">Announcements</div>
+    <div class="books-row announcements-row"></div>
+</div>
+
+<div class="section">
+    <div class="novelty-title">Educational</div>
+    <div class="books-row educational-row"></div>
+</div>
+
+<div class="section">
+    <div class="novelty-title">Other</div>
+    <div class="books-row other-row"></div>
+</div>
+
+</div>
+
+    <div class="modal" id="modal">
+        <div class="modal-box">
+            <div class="close-btn" onclick="closeModal()">✖️</div>
+            <div class="modal-content">
+                <div class="modal-left">
+                    <img src="" alt="book">
+                </div>
+                <div class="modal-right">
+                    <h2 class="modal-title"></h2>
+                    <p class="modal-author"></p>
+                    <p class="modal-rating"></p>
+                </div>
+            </div>
+            <div class="section">
+                <div class="background-title">Favorites</div>
+                <div class="books-row modal-books-row"></div>
+            </div>
+        </div>
+    </div>
+
+<div class="auth-modal" id="authModal">
+    <div class="auth-box">
+
+        <div class="auth-tabs">
+            <div id="tabLogin" class="tab active" onclick="switchTab('login')">Login</div>
+            <div id="tabRegister" class="tab" onclick="switchTab('register')">Register</div>
+        </div>
+
+        <div id="loginForm">
+            <h2>Login</h2>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+
+        <div id="registerForm" style="display:none;">
+            <h2>Registration</h2>
+            <input type="text" id="regName" placeholder="Name">
+            <input type="text" id="regUsername" placeholder="Username without @">
+            <input type="email" id="regEmail" placeholder="Email">
+            <input type="password" id="regPassword" placeholder="Password">
+            <button onclick="register()">Register</button>
+        </div>
+        <div id="authMessage" class="auth-error"></div>
+
+        <div class="close-auth" onclick="closeAuth()">✖️</div>
+    </div>
+</div>
+
+<div class="modal users-modal" id="usersModal">
+    <div class="modal-box">
+        <div class="close-btn" onclick="closeUsersModal()">✖️</div>
+        <h2>Registered Users</h2>
+        <div id="usersPanelContent" class="users-panel-content"></div>
+    </div>
+</div>
+
+    <script type="module" src="./script.js"></script>
+
+    <footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h3>Content Manager</h3>
+            <p>Manage content quickly and conveniently: books, media, users.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Features</h4>
+            <a href="#">Book Management</a>
+            <a href="#">Categories</a>
+            <a href="#">Users</a>
+            <a href="#">Analytics</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Help</h4>
+            <a href="#">FAQ</a>
+            <a href="#">Support</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contacts</h4>
+            <p>📍 Ivano-Frankivsk, Ukraine</p>
+            <p>📧 oleksunyulia30.08@gmail.com</p>
+            <p>📞 +380 99 108 49 82</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Content Manager
+    </div>
+</footer>
+
+</body>
+</html>

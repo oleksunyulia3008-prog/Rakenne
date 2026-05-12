@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>rakenne</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #e6e6e6;
+}
+
+/* HEADER */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background: #ffffff; /* БІЛИЙ */
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo img {
+    height: 38px;
+    mix-blend-mode: multiply;
+}
+
+.search-box input {
+    width: 260px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    background: #dcdde1;
+    outline: none;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    color: #444;
+}
+
+.icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: #444;
+    fill: none;
+    cursor: pointer;
+}
+
+/* MENU */
+.header-bottom {
+    display: flex;
+    gap: 25px;
+    padding: 10px 30px;
+    background: #f1f2f6;
+    border-top: 1px solid #ccc;
+}
+
+.header-bottom a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* MAIN */
+.main {
+    position: relative;
+    padding: 40px;
+}
+
+.background-title {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 120px;
+    color: black;
+    opacity: 0.05;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* КАРТКА */
+.book-card {
+    width: 200px;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    cursor: pointer;
+}
+
+/* КАРТИНКА */
+.book-image {
+    position: relative;
+}
+
+.book-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* СЕРЦЕ */
+.heart-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: #6b3b3b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.heart-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: white;
+    fill: none;
+}
+
+.heart-btn.active svg {
+    fill: white;
+}
+
+/* РЕЙТИНГ */
+.rating {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: #6b3b3b;
+    font-size: 14px;
+}
+
+.rating-left {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.star {
+    font-size: 18px;
+    color: #6b3b3b;
+}
+
+/* ТЕКСТ */
+.book-title {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.book-author {
+    font-size: 13px;
+    color: gray;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: none;
+    padding: 40px;
+}
+
+.modal-bg-text {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 120px;
+    opacity: 0.05;
+}
+
+.modal-content {
+    display: flex;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.modal-left img {
+    width: 250px;
+    border-radius: 10px;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.modal-author {
+    color: gray;
+}
+
+.modal-right {
+    flex: 1;
+    border: 2px dashed #ccc;
+    padding: 20px;
+}
+
+/* кнопка закриття */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header-top">
+    <div class="left-section">
+        <div class="logo">
+            <img src="logo.jpg" alt="rakenne">
+        </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search...">
+        </div>
+    </div>
+
+    <div class="header-icons">
+        <div>👤 Authorization</div>
+
+        <!-- СЕРЦЕ -->
+        <div class="icon">
+            <svg viewBox="0 0 24 24" stroke-width="2">
+                <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+            </svg>
+        </div>
+
+        <!-- КОШИК -->
+        <div class="icon">
+            <svg viewBox="0 0 24 24" stroke-width="2">
+                <circle cx="9" cy="20" r="1"></circle>
+                <circle cx="17" cy="20" r="1"></circle>
+                <path d="M1 1h4l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L23 6H6"></path>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- MENU -->
+<div class="header-bottom">
+    <a href="#">Books</a>
+    <a href="#">Content</a>
+    <a href="#">Categories</a>
+    <a href="#">Media</a>
+    <a href="#">Users</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <div class="background-title">Bestsellers</div>
+
+    <div class="book-card" onclick="openModal()">
+
+        <div class="book-image">
+            <img src="book.jpg" alt="book">
+
+            <!-- СЕРЦЕ -->
+            <button class="heart-btn" onclick="event.stopPropagation(); this.classList.toggle('active')">
+                <svg viewBox="0 0 24 24" stroke-width="2">
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- РЕЙТИНГ -->
+        <div class="rating">
+            <div class="rating-left">
+                <span class="star">★</span>
+                <span>...</span>
+            </div>
+
+            <div style="font-size:11px; color:gray; text-align:right;">
+                number of<br>rating
+            </div>
+        </div>
+
+        <div class="book-title">Haunting Adeline</div>
+        <div style="font-size:13px; color:#555;">Book 1</div>
+        <div class="book-author">Hayley Dee Carlton</div>
+
+    </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+    <div class="close-btn" onclick="closeModal()">✖</div>
+
+    <div class="modal-bg-text">Content Book</div>
+
+    <div class="modal-content">
+
+        <div class="modal-left">
+            <img src="book.jpg">
+            <div class="modal-title">Haunting Adeline</div>
+            <div class="modal-author">Hayley Dee Carlton</div>
+        </div>
+
+        <div class="modal-right">
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function openModal() {
+    document.getElementById("modal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>

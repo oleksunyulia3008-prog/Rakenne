@@ -1,0 +1,51 @@
+<div class="header-top">
+        <div class="left-section">
+
+            <div class="logo">
+                <img src="logo.jpg" alt="rakenne">
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+            </div>
+
+        </div>
+
+        <div class="header-icons">
+
+    <div id="authBtn" onclick="openAuth()">Authorization</div>
+
+    <div class="icon heart-top" onclick="toggleFavoritesModal()">
+                <svg viewBox="0 0 24 24" stroke-width="2">
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+                </svg>
+            </div>
+
+    <div class="icon">
+                <svg viewBox="0 0 24 24" stroke-width="2">
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="17" cy="20" r="1"></circle>
+                    <path d="M1 1h4l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L23 6H6"></path>
+                </svg>
+            </div>
+
+    <div id="adminPanelBtn" style="display:none;" onclick="showUsers()">
+    👑 Admin Panel
+</div>
+
+    <div id="logoutBtn" style="display:none;" onclick="logout()">
+        Logout
+    </div>
+
+</div>
+
+        </div>
+    </div>
+
+    <div class="header-bottom">
+        <a href="#">Books</a>
+        <a href="#">Content</a>
+        <a href="#">Categories</a>
+        <a href="#">Media</a>
+        <a href="users.html" id="usersBtn" style="display:none;">Users</a>
+    </div>
