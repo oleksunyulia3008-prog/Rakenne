@@ -1,57 +1,105 @@
 import { supabase } from "./supabaseClient.js";
 
 const fallbackBooks = [
-    { id: "book-1", title: "Haunting Adeline", author: "Hayley Dee Carlton", img: "book.jpg", rating: 4.7, votes: 1250, category: "bestseller" },
-    { id: "book-2", title: "Crescent City. House of Earth and Blood", author: "Sarah J. Maas", img: "book2.png", rating: 4.5, votes: 980, category: "bestseller" },
-    { id: "book-3", title: "From Blood and Ash", author: "Jennifer L. Armentrout", img: "book3.png", rating: 4.6, votes: 1100, category: "bestseller" },
-    { id: "book-4", title: "Gild", author: "Raven Kennedy", img: "book4.png", rating: 4.4, votes: 850, category: "bestseller" },
-    { id: "book-5", title: "A Touch of Darkness", author: "Scarlett St. Clair", img: "book5.png", rating: 4.8, votes: 1300, category: "bestseller" },
-    { id: "book-6", title: "Buttons&Lace", author: "Penelope Sky", img: "book6.png", rating: 4.3, votes: 750, category: "bestseller" },
-    { id: "book-7", title: "Kingdom of the Wicked", author: "Kerri Maniscalco", img: "book7.jpeg", rating: 4.6, votes: 1000, category: "bestseller" },
-    { id: "book-8", title: "Fourth Wing", author: "Rebecca Yarros", img: "book8.png", rating: 4.7, votes: 1200, category: "bestseller" },
-    { id: "book-9", title: "Shatter Me", author: "Tahereh Mafi", img: "book9.png", rating: 4.5, votes: 900, category: "bestseller" },
-    { id: "book-10", title: "A Good Girl's Guide to Murder", author: "Holly Jackson", img: "book10.png", rating: 4.6, votes: 1100, category: "bestseller" },
-    { id: "book-11", title: "The Surgeon", author: "Tess Gerritsen", img: "book11.jpg", rating: 4.4, votes: 800, category: "bestseller" },
-    { id: "book-12", title: "My Dark Romeo", author: "Parker S. Huntington, L.J.Shen", img: "book12.png", rating: 4.7, votes: 1250, category: "bestseller" },
-    { id: "book-13", title: "Five Survive", author: "Holly Jackson", img: "book13.png", rating: 4.5, votes: 950, category: "bestseller" },
-    { id: "book-14", title: "Punk 57", author: "Penelope Douglas", img: "book14.png", rating: 4.3, votes: 700, category: "bestseller" },
-    { id: "book-15", title: "If had been with me", author: "Laura Nowlin", img: "book15.png", rating: 4.6, votes: 1050, category: "bestseller" },
-    { id: "book-16", title: "Murder on the Orient Express", author: "Agatha Christie", img: "book16.png", rating: 4.8, votes: 1350, category: "bestseller" },
-    { id: "book-17", title: "Bound by Honor", author: "Cora Reilly", img: "book17.png", rating: 4.5, votes: 900, category: "bestseller" },
-    { id: "book-18", title: "Gothikana", author: "RuNyx", img: "book18.png", rating: 4.4, votes: 800, category: "bestseller" },
-    { id: "book-19", title: "The Chemistry of Death", author: "Simon Beckett", img: "book19.png", rating: 4.3, votes: 700, category: "bestseller" },
-    { id: "book-20", title: "Pet Sematary", author: "Stephen King", img: "book20.jpg", rating: 4.6, votes: 1100, category: "bestseller" }
+    { id: "book-1", title: "Haunting Adeline", author: "Hayley Dee Carlton", img: "images/book1.jpg", category: "bestseller" },
+    { id: "book-2", title: "Crescent City. House of Earth and Blood", author: "Sarah J. Maas", img: "images/book2.png", category: "bestseller" },
+    { id: "book-3", title: "From Blood and Ash", author: "Jennifer L. Armentrout", img: "images/book3.png", category: "bestseller" },
+    { id: "book-4", title: "Gild", author: "Raven Kennedy", img: "images/book4.png", category: "bestseller" },
+    { id: "book-5", title: "A Touch of Darkness", author: "Scarlett St. Clair", img: "images/book5.png", category: "bestseller" },
+    { id: "book-6", title: "Buttons&Lace", author: "Penelope Sky", img: "images/book6.png", category: "bestseller" },
+    { id: "book-7", title: "Kingdom of the Wicked", author: "Kerri Maniscalco", img: "images/book7.jpeg", category: "bestseller" },
+    { id: "book-8", title: "Fourth Wing", author: "Rebecca Yarros", img: "images/book8.png", category: "bestseller" },
+    { id: "book-9", title: "Shatter Me", author: "Tahereh Mafi", img: "images/book9.png", category: "bestseller" }, // Assuming book9.png is a valid image
+    { id: "book-10", title: "A Good Girl's Guide to Murder", author: "Holly Jackson", img: "images/book10.png", category: "bestseller" }, // Assuming book10.png is a valid image
+    { id: "book-11", title: "The Surgeon", author: "Tess Gerritsen", img: "images/book11.jpg", category: "bestseller" },
+    { id: "book-12", title: "My Dark Romeo", author: "Parker S. Huntington, L.J.Shen", img: "images/book12.png", category: "bestseller" }, // Assuming book12.png is a valid image
+    { id: "book-13", title: "Five Survive", author: "Holly Jackson", img: "images/book13.png", category: "bestseller" }, // Assuming book13.png is a valid image
+    { id: "book-14", title: "Punk 57", author: "Penelope Douglas", img: "images/book14.png", category: "bestseller" }, // Assuming book14.png is a valid image
+    { id: "book-15", title: "If had been with me", author: "Laura Nowlin", img: "images/book15.png", category: "bestseller" }, // Assuming book15.png is a valid image
+    { id: "book-16", title: "Murder on the Orient Express", author: "Agatha Christie", img: "images/book16.jpg", category: "bestseller" }, // Assuming book16.jpg is a valid image
+    { id: "book-17", title: "Bound by Honor", author: "Cora Reilly", img: "images/book17.png", category: "bestseller" },
+    { id: "book-18", title: "Gothikana", author: "RuNyx", img: "images/book18.png", category: "bestseller" }, // Assuming book18.png is a valid image
+    { id: "book-19", title: "The Chemistry of Death", author: "Simon Beckett", img: "images/book19.png", category: "bestseller" },
+    { id: "book-20", title: "Pet Sematary", author: "Stephen King", img: "images/book20.jpg", category: "bestseller" }
 ];
 
 const fallbackNoveltyBooks = [
-    { id: "novelty-1", title: "New Book 1", author: "Author 1", img: "img1.jpg", category: "novelty" },
-    { id: "novelty-2", title: "New Book 2", author: "Author 2", img: "img2.jpg", category: "novelty" }
+    { id: "novelty-1", title: "Starside", author: "Alex Aster", img: "images/novelty1.jpg", category: "novelty" }, // Assuming novelty1.jpg is a valid image
+    { id: "novelty-2", title: "Forbidden Alchemy", author: "Stacey McEwan", img: "images/novelty2.jpg", category: "novelty" }, // Assuming novelty2.jpg is a valid image
+    { id: "novelty-3", title: "A Forsaken Prophecy", author: "Stacey McEwan", img: "images/novelty3.jpg", category: "novelty" }, // Assuming novelty3.jpg is a valid image
+    { id: "novelty-4", title: "Daggermouth", author: "H.M.Wolfe", img: "images/novelty4.webp", category: "novelty" }, // Assuming novelty4.webp is a valid image
+    { id: "novelty-5", title: "With Hearts of Flame", author: "Briar Boleyn", img: "images/novelty5.jpg", category: "novelty" }, // Assuming novelty5.jpg is a valid image
+    { id: "novelty-6", title: "Dire Bound", author: "Sable Sorensen", img: "images/novelty6.jpg", category: "novelty" }, // Assuming novelty6.jpg is a valid image
+    { id: "novelty-7", title: "Eldritch", author: "Keri Lake", img: "images/novelty7.webp", category: "novelty" }, // Assuming novelty7.webp is a valid image
+    { id: "novelty-8", title: "Vine of Hearts", author: "Julie Soto", img: "images/novelty8.webp", category: "novelty" }, // Assuming novelty8.webp is a valid image
+    { id: "novelty-9", title: "Cursed City", author: "Kate Golden", img: "images/novelty9.jpg", category: "novelty" }, // Assuming novelty9.jpg is a valid image
+    { id: "novelty-10", title: "The Wrath Gods Reap", author: "Abigall Owen", img: "images/novelty10.jpg", category: "novelty" } // Assuming novelty10.jpg is a valid image
 ];
 
 const fallbackFictionBooks = [
-    { id: "fiction-1", title: "Fiction Book 1", author: "Author A", img: "book1.jpg", rating: 4.5, votes: 500, category: "fiction" }
+    { id: "fiction-1", title: "Kirill", author: "Lilian Harris", img: "images/fiction1.jpg", category: "fiction" }, // Assuming fiction1.jpg is a valid image
+    { id: "fiction-2", title: "Fury Bound", author: "Sable Sorensen", img: "images/fiction2.webp", category: "fiction" }, // Assuming fiction2.webp is a valid image
+    { id: "fiction-3", title: "My Dreadeul Darling", author: "H.D.Carlton", img: "images/fiction3.jpg", category: "fiction" }, // Assuming fiction3.jpg is a valid image
+    { id: "fiction-4", title: "Between Tides&Thunder", author: "Leena Kazak", img: "images/fiction4.jpg", category: "fiction" }, // Assuming fiction4.jpg is a valid image
+    { id: "fiction-5", title: "Black House", author: "Stephen King and Peter Straub", img: "images/fiction5.jpg", category: "fiction" }, // Assuming fiction5.jpg is a valid image
+    { id: "fiction-6", title: "If Walls Could Talk", author: "Jean Grainger", img: "images/fiction6.jpg", category: "fiction" }, // Assuming fiction6.jpg is a valid image
+    { id: "fiction-7", title: "You'll Miss Me When I'm Gone", author: "A.R.Torre", img: "images/fiction7.webp", category: "fiction" }, // Assuming fiction7.webp is a valid image
+    { id: "fiction-8", title: "Possessive Enemy", author: "Michelle Heard", img: "images/fiction8.jpg", category: "fiction" }, // Assuming fiction8.jpg is a valid image
+    { id: "fiction-9",  title: "The Dinner Party", author: "Freida mcFadden", img: "images/fiction9.webp", category: "fiction" }, // Assuming fiction9.webp is a valid image
+    { id: "fiction-10", title: "Mistborn", author: "Brandon Sanderson", img: "images/fiction10.jpg", category: "fiction" } // Assuming fiction10.jpg is a valid image
 ];
 
-const fallbackAnnouncementsBooks = [
-    { id: "announcements-1", title: "Announcement 1", author: "Author B", img: "book2.jpg", rating: 4.2, votes: 300, category: "announcements" }
+const fallbackMysteryThrillerBooks = [
+    { id: "mystery-thriller-1", title: "Boardroom Mask", author: "Nicole Fox", img: "images/mystery-thriller1.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller1.jpg is a valid image
+    { id: "mystery-thriller-2", title: "You Can Tell Me", author: "Melinda Leigh", img: "images/mystery-thriller2.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller2.jpg is a valid image
+    { id: "mystery-thriller-3", title: "The Final System", author: "Anthony Tardiff", img: "images/mystery-thriller3.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller3.jpg is a valid image
+    { id: "mystery-thriller-4", title: "The Missing One", author: "A.R.Torre", img: "images/mystery-thriller4.webp", category: "mystery-thriller" }, // Assuming mystery-thriller4.webp is a valid image
+    { id: "mystery-thriller-5", title: "The Final Target", author: "Nora Roberts", img: "images/mystery-thriller5.webp", category: "mystery-thriller" }, // Assuming mystery-thriller5.webp is a valid image
+    { id: "mystery-thriller-6", title: "The Keeper", author: "Tana French", img: "images/mystery-thriller6.webp", category: "mystery-thriller" }, // Assuming mystery-thriller6.webp is a valid image
+    { id: "mystery-thriller-7", title: "Origin", author: "Dan Brown", img: "images/mystery-thriller7.webp", category: "mystery-thriller" }, // Assuming mystery-thriller7.webp is a valid image
+    { id: "mystery-thriller-8", title: "God of War", author: "Rina Kent", img: "images/mystery-thriller8.webp", category: "mystery-thriller" }, // Assuming mystery-thriller8.webp is a valid image
+    { id: "mystery-thriller-9", title: "Heart of my Monster", author: "Rina Kent", img: "images/mystery-thriller9.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller9.jpg is a valid image
+    { id: "mystery-thriller-10", title: "Throne of Power", author: "Rina Kent", img: "images/mystery-thriller10.jpg", category: "mystery-thriller" } // Assuming mystery-thriller10.jpg is a valid image
 ];
 
-const fallbackEducationalBooks = [
-    { id: "educational-1", title: "Educational 1", author: "Author C", img: "book3.jpg", rating: 4.8, votes: 800, category: "educational" }
+const fallbackRomanceBooks = [
+    { id: "romance-1", title: "Rites of the Starling", author: "Devney Perry", img: "images/romance1.jpg", category: "romance" }, // Assuming romance1.jpg is a valid image
+    { id: "romance-2", title: "Crown Me Yours", author: "Liv Zander", img: "images/romance2.webp", category: "romance" }, // Assuming romance2.webp is a valid image
+    { id: "romance-3", title: "Inked in Betrayal", author: "Victoria Paige", img: "images/romance3.jpg", category: "romance" }, // Assuming romance3.jpg is a valid image
+    { id: "romance-4", title: "Trauma Bonded", author: "Jaymin Eve & Tate James", img: "images/romance4.webp", category: "romance" }, // Assuming romance4.webp is a valid image
+    { id: "romance-5", title: "Beautiful Graves", author: "L.J.Shen", img: "images/romance5.webp", category: "romance" }, // Assuming romance5.webp is a valid image
+    { id: "romance-6", title: "Law Maker", author: "Susie Tate", img: "images/romance6.webp", category: "romance" }, // Assuming romance6.webp is a valid image
+    { id: "romance-7", title: "Wicked Sanctuary", author: "Jane Henry", img: "images/romance7.webp", category: "romance" }, // Assuming romance7.webp is a valid image
+    { id: "romance-8", title: "Love in the Afternoon", author: "Lisa Kleypas", img: "images/romance8.webp", category: "romance" }, // Assuming romance8.webp is a valid image
+    { id: "romance-9", title: "Variation", author: "Rebecca Yarros", img: "images/romance9.webp", category: "romance" }, // Assuming romance9.webp is a valid image
+    { id: "romance-10", title: "Keeping 13", author: "Chloe Walsh", img: "images/romance10.webp", category: "romance" } // Assuming romance10.webp is a valid image
 ];
 
-const fallbackOtherBooks = [
-    { id: "other-1", title: "Other 1", author: "Author D", img: "book4.jpg", rating: 4.0, votes: 200, category: "other" }
+const fallbackFantasyBooks = [
+    { id: "fantasy-1", title: "Fated of the Wolf Maiden", author: "April l.Moon", img: "images/fantasy1.webp", category: "fantasy" }, // Assuming fantasy1.webp is a valid image
+    { id: "fantasy-2", title: "King of Gluttony", author: "Ana Huang", img: "images/fantasy2.webp", category: "fantasy" }, // Assuming fantasy2.webp is a valid image
+    { id: "fantasy-3", title: "The Nightmare in HIM", author: "Suzanne Wright", img: "images/fantasy3.jpg", category: "fantasy" }, // Assuming fantasy3.jpg is a valid image
+    { id: "fantasy-4", title: "While the Dark Remains", author: "Joanna Ruth Meyer", img: "images/fantasy4.webp", category: "fantasy" }, // Assuming fantasy4.webp is a valid image
+    { id: "fantasy-5", title: "The People's Library", author: "Veronica G.Henry", img: "images/fantasy5.webp", category: "fantasy" }, // Assuming fantasy5.webp is a valid image
+    { id: "fantasy-6", title: "The Shattered King", author: "Charlie N.Holmberg", img: "images/fantasy6.webp", category: "fantasy" }, // Assuming fantasy6.webp is a valid image
+    { id: "fantasy-7", title: "Rune Breaker", author: "Mila Finch", img: "images/fantasy7.webp", category: "fantasy" }, // Assuming fantasy7.webp is a valid image
+    { id: "fantasy-8", title: "Wild Scottish Magic", author: "Tricia O'Malley", img: "images/fantasy8.webp", category: "fantasy" } // Assuming fantasy8.webp is a valid image
 ];
 
-const fallbackAllBooks = [
+const fallbackAllBooks = [ 
     ...fallbackBooks,
     ...fallbackNoveltyBooks,
     ...fallbackFictionBooks,
-    ...fallbackAnnouncementsBooks,
-    ...fallbackEducationalBooks,
-    ...fallbackOtherBooks
+    ...fallbackMysteryThrillerBooks,
+    ...fallbackRomanceBooks,
+    ...fallbackFantasyBooks
 ];
+
+const defaultBookImage = "images/book.jpg"; // Це зображення-замінник, його залишаємо як є.
+
+const ADMIN_EMAIL = "admin@gmail.com";
+const ADMIN_PASSWORD = "admin123";
+const ADMIN_USER_ID = "admin-local";
 
 let currentUser = null;
 let favoriteBookIds = [];
@@ -59,52 +107,56 @@ let books = [];
 let categories = {
     novelty: [],
     fiction: [],
+    mysterythriller: [], 
+    romance: [],         
+    fantasy: [],          
     announcements: [],
     educational: [],
     other: []
 };
 
-function generateStars(rating) {
-    let stars = "";
-    for (let i = 1; i <= 5; i += 1) {
-        stars += rating >= i ? "★" : "☆";
-    }
-    return stars;
-}
-
 function renderBooks(list, containerSelector) {
     const container = document.querySelector(containerSelector);
+
     if (!container) return;
 
     container.innerHTML = "";
 
     list.forEach((book) => {
-        const isFavorite = favoriteBookIds.includes(book.id);
+        const isFavorite = favoriteBookIds.includes(String(book.id));
+        const imageUrl = book.img
+            ? String(book.img)
+            : defaultBookImage;
+
         const card = document.createElement("div");
+
         card.className = "book-card";
+
         card.innerHTML = `
             <div class="book-image">
-                <img src="${book.img}" alt="${book.title}">
-                <button class="heart-btn ${isFavorite ? "active" : ""}"
-                    onclick="event.stopPropagation(); toggleFavorite(this, '${book.id}')">
+                <img 
+                    src="${imageUrl}" 
+                    alt="${book.title}"
+                    onerror="this.onerror=null;this.src='${defaultBookImage}';"
+                >
+
+                <button 
+                    class="heart-btn ${isFavorite ? "active" : ""}"
+                    data-book-id="${book.id}"
+                    onclick="event.stopPropagation(); toggleFavorite(this)"
+                >
                     <svg viewBox="0 0 24 24">
                         <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
                     </svg>
                 </button>
             </div>
-            <div class="rating">
-                <div class="stars">
-                    ${generateStars(book.rating || 0)}
-                    <span>${book.rating || 0}</span>
-                </div>
-                <div class="rating-text">
-                    ${(book.votes || 0)} ratings
-                </div>
-            </div>
+
             <div class="book-title">${book.title}</div>
             <div class="book-author">${book.author}</div>
         `;
+
         card.onclick = () => openModal(book);
+
         container.appendChild(card);
     });
 }
@@ -114,6 +166,9 @@ function categorizeBooks(bookArray) {
     categories = {
         novelty: [],
         fiction: [],
+        mysterythriller: [],
+        romance: [],
+        fantasy: [],
         announcements: [],
         educational: [],
         other: []
@@ -121,24 +176,35 @@ function categorizeBooks(bookArray) {
 
     bookArray.forEach((book) => {
         switch ((book.category || "").toLowerCase()) {
-            case "novelty":
-                categories.novelty.push(book);
-                break;
-            case "fiction":
-                categories.fiction.push(book);
-                break;
-            case "announcements":
-                categories.announcements.push(book);
-                break;
-            case "educational":
-                categories.educational.push(book);
-                break;
-            default:
-                if (book.category !== "bestseller") {
-                    categories.other.push(book);
-                }
-                break;
-        }
+    case "novelty":
+        categories.novelty.push(book);
+        break;
+
+    case "fiction":
+        categories.fiction.push(book);
+        break;
+
+    case "mystery-thriller":
+        categories.mysterythriller.push(book);
+        break;
+
+    case "romance":
+        categories.romance.push(book);
+        break;
+
+    case "fantasy":
+        categories.fantasy.push(book);
+        break;
+}
+    });
+
+    console.log("Categorized books:", {
+        bestseller: books.length,
+        novelty: categories.novelty.length,
+        fiction: categories.fiction.length,
+        mysterythriller: categories.mysterythriller.length,
+        romance: categories.romance.length,
+        fantasy: categories.fantasy.length
     });
 }
 
@@ -147,6 +213,9 @@ function getAllBooks() {
         ...books,
         ...categories.novelty,
         ...categories.fiction,
+        ...categories.mysterythriller,
+        ...categories.romance,
+        ...categories.fantasy,
         ...categories.announcements,
         ...categories.educational,
         ...categories.other
@@ -154,13 +223,31 @@ function getAllBooks() {
 }
 
 async function loadBooks() {
-    const { data, error } = await supabase.from("books").select("*").order("votes", { ascending: false });
+    const { data, error } = await supabase
+        .from("books")
+        .select("*")
+        .order("votes", { ascending: false });
+
     if (error || !data || !data.length) {
         console.warn("Supabase books load error, using fallback data:", error);
+
         categorizeBooks(fallbackAllBooks);
         return;
     }
-    categorizeBooks(data);
+
+    const normalizedBooks = data.map((book) => ({
+        ...book,
+        id: book.id != null ? String(book.id) : book.id
+    }));
+
+    console.log("Loaded books from Supabase:", normalizedBooks);
+    console.log("Novelty books:", normalizedBooks.filter(book => book.category === 'novelty'));
+    console.log("Fiction books:", normalizedBooks.filter(book => book.category === 'fiction'));
+    console.log("Mystery/Thriller books:", normalizedBooks.filter(book => book.category === 'mystery-thriller'));
+    console.log("Romance books:", normalizedBooks.filter(book => book.category === 'romance'));
+    console.log("Fantasy books:", normalizedBooks.filter(book => book.category === 'fantasy'));
+
+    categorizeBooks(normalizedBooks);
 }
 
 async function loadFavorites() {
@@ -180,16 +267,194 @@ async function loadFavorites() {
         return;
     }
 
-    favoriteBookIds = data.map((item) => item.book_id);
+    favoriteBookIds = (data || []).map((item) => String(item.book_id));
+}
+
+function getFavoriteBooks() {
+    return getAllBooks().filter(book =>
+        favoriteBookIds.includes(String(book.id))
+    );
+}
+
+function renderFavoritesPage() {
+    const container = document.querySelector(".books-row");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    const favoriteBooks = getFavoriteBooks();
+
+    document.querySelector(".background-title").textContent = "Favorites";
+
+    favoriteBooks.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "book-card";
+
+        const imageUrl = book.img || defaultBookImage;
+
+        card.innerHTML = `
+            <div class="book-image">
+                <img src="${imageUrl}" />
+            </div>
+            <div class="book-title">${book.title}</div>
+            <div class="book-author">${book.author}</div>
+        `;
+
+        card.onclick = () => openModal(book);
+
+        container.appendChild(card);
+    });
+}
+
+function showFavoritesPage() {
+    if (!currentUser) {
+        openAuth("Login required");
+        return;
+    }
+
+    renderFavoritesPage();
+}
+
+function showHomePage() {
+    document.querySelector(".background-title").textContent = "Bestsellers";
+    renderAll();
+}
+
+function handleAdminClick(event) {
+    event.preventDefault();
+    showAdminPanel();
+}
+
+async function showAdminPanel() {
+    const isAdmin = currentUser?.email === "admin@gmail.com";
+    if (!isAdmin) {
+        openAuth("Admin login required", "login");
+        return;
+    }
+    await loadAdminPanel();
+    const modal = document.getElementById("adminModal");
+    if (modal) modal.style.display = "block";
+}
+
+function closeAdminPanel() {
+    const modal = document.getElementById("adminModal");
+    if (modal) modal.style.display = "none";
+    if (window.location.pathname.endsWith("admin.html")) {
+        window.location.href = "index.html";
+    }
+}
+
+async function loadAdminPanel() {
+    const info = document.getElementById("adminPanelInfo");
+    const content = document.getElementById("adminUsersContent");
+    if (!content) return;
+    content.innerHTML = "<p>Loading users...</p>";
+
+    const { data: profiles, error } = await supabase
+        .from("profiles")
+        .select("id, name, username, email");
+
+    if (error) {
+        content.innerHTML = `<p>Unable to load users: ${error.message}</p>`;
+        return;
+    }
+
+    const { data: favorites, error: favError } = await supabase
+        .from("favorites")
+        .select("user_id");
+
+    if (favError) {
+        console.warn("Unable to load favorites count:", favError);
+    }
+
+    const favoritesCount = (favorites || []).reduce((acc, favorite) => {
+        const userId = String(favorite.user_id);
+        acc[userId] = (acc[userId] || 0) + 1;
+        return acc;
+    }, {});
+
+    const totalUsers = profiles?.length || 0;
+    const totalFavorites = (favorites || []).length;
+    if (info) {
+        info.innerHTML = `
+            <div class="admin-info-row"><strong>Total users:</strong> ${totalUsers}</div>
+            <div class="admin-info-row"><strong>Total favorites:</strong> ${totalFavorites}</div>
+        `;
+    }
+
+    if (!profiles || profiles.length === 0) {
+        content.innerHTML = "<p>No registered users.</p>";
+        return;
+    }
+
+    content.innerHTML = "";
+    profiles.forEach((profile) => {
+        const count = favoritesCount[String(profile.id)] || 0;
+        const card = document.createElement("div");
+        card.className = "admin-user-card";
+        const canDelete = currentUser?.email === "admin@gmail.com" && profile.email !== "admin@gmail.com";
+        card.innerHTML = `
+            <div class="admin-user-card-header">
+                <div>
+                    <strong>${profile.name || "No name"}</strong>
+                    <p>${profile.username ? `@${profile.username}` : "No username"}</p>
+                </div>
+                <div>${profile.email || "No email"}</div>
+            </div>
+            <div class="admin-user-card-info">
+                <div><strong>Favorites:</strong> ${count}</div>
+            </div>
+            <div class="admin-user-card-actions">
+                ${canDelete ? `<button class="delete-user-btn" onclick="deleteUser('${profile.id}')">Delete user</button>` : ""}
+            </div>
+        `;
+        content.appendChild(card);
+    });
+}
+
+async function deleteUser(userId) {
+    if (!currentUser || currentUser.email !== "admin@gmail.com") {
+        alert("Only admin can delete users.");
+        return;
+    }
+
+    if (userId === currentUser.id) {
+        alert("Admin cannot delete their own account.");
+        return;
+    }
+
+    const confirmed = confirm("Delete this user and all their favorites? This cannot be undone.");
+    if (!confirmed) return;
+
+    const { error: favError } = await supabase
+        .from("favorites")
+        .delete()
+        .eq("user_id", userId);
+    if (favError) {
+        console.warn("Unable to delete favorites for user:", favError);
+    }
+
+    const { error: profileError } = await supabase
+        .from("profiles")
+        .delete()
+        .eq("id", userId);
+    if (profileError) {
+        alert("Unable to delete user: " + profileError.message);
+        return;
+    }
+
+    alert("User deleted successfully.");
+    await loadAdminPanel();
 }
 
 function renderAll() {
     renderBooks(books, ".books-row");
     renderBooks(categories.novelty, ".novelty-row");
     renderBooks(categories.fiction, ".fiction-row");
-    renderBooks(categories.announcements, ".announcements-row");
-    renderBooks(categories.educational, ".educational-row");
-    renderBooks(categories.other, ".other-row");
+    renderBooks(categories.mysterythriller, ".mystery-thriller-row");
+    renderBooks(categories.romance, ".romance-row");
+    renderBooks(categories.fantasy, ".fantasy-row");
 }
 
 function openModal(book) {
@@ -197,14 +462,17 @@ function openModal(book) {
     const modalImage = document.querySelector(".modal-left img");
     const title = document.querySelector(".modal-title");
     const author = document.querySelector(".modal-author");
-    const rating = document.querySelector(".modal-rating");
 
-    if (!modal || !modalImage || !title || !author || !rating) return;
+    if (!modal || !modalImage || !title || !author) return;
 
-    modalImage.src = book.img;
+    const imageUrl = book.img ? String(book.img) : defaultBookImage;
+    modalImage.src = imageUrl;
+    modalImage.onerror = () => {
+        modalImage.onerror = null;
+        modalImage.src = defaultBookImage;
+    };
     title.textContent = book.title;
     author.textContent = `by ${book.author}`;
-    rating.textContent = `Rating: ${book.rating || 0} (${book.votes || 0} votes)`;
     modal.style.display = "block";
 }
 
@@ -215,10 +483,11 @@ function closeModal() {
     }
 }
 
-function openAuth(message = "") {
+function openAuth(message = "", tab = "login") {
     const modal = document.getElementById("authModal");
     const msg = document.getElementById("authMessage");
     if (msg) msg.textContent = message;
+    switchTab(tab);
     if (modal) modal.style.display = "flex";
 }
 
@@ -227,28 +496,96 @@ function closeAuth() {
     if (modal) modal.style.display = "none";
 }
 
-async function toggleFavorite(btn, bookId) {
+async function ensureProfile(user) {
+    if (!user?.id) return;
+
+    const { data: existingById, error: idError } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("id", user.id)
+        .single();
+
+    if (!idError && existingById) {
+        try {
+            const { error: updateError } = await supabase
+                .from("profiles")
+                .update({ last_seen: new Date().toISOString() })
+                .eq("id", user.id);
+            if (updateError) {
+                if (!updateError.message.toLowerCase().includes("last_seen")) {
+                    console.warn("Unable to update last seen:", updateError);
+                }
+            }
+        } catch (error) {
+            console.warn("Unable to update last seen:", error);
+        }
+        return;
+    }
+
+    const { data: existingByEmail, error: emailError } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("email", user.email)
+        .limit(1);
+
+    if (!emailError && existingByEmail && existingByEmail.length > 0) {
+        const existing = existingByEmail[0];
+        try {
+            const { error: updateError } = await supabase
+                .from("profiles")
+                .update({ last_seen: new Date().toISOString() })
+                .eq("id", existing.id);
+            if (updateError) {
+                if (!updateError.message.toLowerCase().includes("last_seen")) {
+                    console.warn("Unable to update last seen for existing email:", updateError);
+                }
+            }
+        } catch (error) {
+            console.warn("Unable to update last seen for existing email:", error);
+        }
+        return;
+    }
+
+    const { error } = await supabase.from("profiles").insert({
+        id: user.id,
+        email: user.email,
+        name: user.user_metadata?.name || null,
+        username: user.user_metadata?.username || null
+    });
+
+    if (error) {
+        console.warn("Unable to ensure profile:", error);
+    }
+}
+
+async function toggleFavorite(btn) {
     if (!currentUser) {
         openAuth("Login required");
         return;
     }
 
-    const isFavorite = favoriteBookIds.includes(bookId);
+    const bookId = btn.getAttribute('data-book-id');
+    const normalizedBookId = String(bookId);
+    const isFavorite = favoriteBookIds.includes(normalizedBookId);
     if (isFavorite) {
         const { error } = await supabase
             .from("favorites")
             .delete()
-            .match({ user_id: currentUser.id, book_id: bookId });
+            .match({ user_id: currentUser.id, book_id: normalizedBookId });
         if (error) {
             console.warn("Unable to remove favorite:", error);
+            alert("Could not remove from favorites: " + error.message);
+            return;
         }
     } else {
         const { error } = await supabase.from("favorites").insert({
             user_id: currentUser.id,
-            book_id: bookId
+            book_id: normalizedBookId
         });
         if (error) {
             console.warn("Unable to save favorite:", error);
+            alert("Could not add to favorites: " + error.message);
+            return;
         }
     }
 
@@ -258,35 +595,62 @@ async function toggleFavorite(btn, bookId) {
 
 function showFavoritesModal() {
     if (!currentUser) {
-        openAuth("To view favorites, login required");
+        openAuth("To view favorites, login required", "login");
         return;
     }
 
-    const modal = document.getElementById("modal");
-    const container = document.querySelector(".modal-books-row");
-    if (!modal || !container) return;
+    const modal = document.getElementById("favoritesModal");
+    const container = document.querySelector(".favorites-books-row");
+    const messageNode = document.querySelector(".favorites-modal-message");
+    if (!modal || !container || !messageNode) return;
 
-    const favoriteBooks = getAllBooks().filter((book) => favoriteBookIds.includes(book.id));
+    const favoriteBooks = getAllBooks().filter((book) => favoriteBookIds.includes(String(book.id)));
     container.innerHTML = "";
     modal.style.display = "block";
 
     if (favoriteBooks.length === 0) {
-        container.innerHTML = "<p>No favorites yet</p>";
+        messageNode.textContent = "No favorites yet. Add a book by clicking the heart icon.";
         return;
     }
+
+    messageNode.textContent = "Your favorite books:";
 
     favoriteBooks.forEach((book) => {
         const card = document.createElement("div");
         card.className = "book-card";
+        const imageUrl = book.img ? String(book.img) : defaultBookImage;
+        const isFavorite = favoriteBookIds.includes(String(book.id));
         card.innerHTML = `
-            <div class="book-image">
-                <img src="${book.img}" alt="${book.title}">
-            </div>
+        <div class="book-image">
+    <img 
+        src="${imageUrl}" 
+        alt="${book.title}"
+        onerror="this.onerror=null;this.src='${defaultBookImage}';"
+    >
+
+    <button 
+        class="heart-btn ${isFavorite ? "active" : ""}"
+        data-book-id="${book.id}"
+        onclick="event.stopPropagation(); toggleFavorite(this)"
+    >
+        <svg viewBox="0 0 24 24">
+            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+    </button>
+</div>
             <div class="book-title">${book.title}</div>
             <div class="book-author">${book.author}</div>
         `;
+        card.onclick = () => openModal(book);
         container.appendChild(card);
     });
+}
+
+function closeFavoritesModal() {
+    const modal = document.getElementById("favoritesModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
 }
 
 async function login() {
@@ -296,6 +660,24 @@ async function login() {
 
     if (!email || !pass) {
         if (messageNode) messageNode.textContent = "Fill in all fields";
+        return;
+    }
+
+    if (email.toLowerCase() === ADMIN_EMAIL && pass === ADMIN_PASSWORD) {
+        currentUser = {
+            id: ADMIN_USER_ID,
+            email: ADMIN_EMAIL,
+            user_metadata: {
+                name: "Admin",
+                username: "admin"
+            }
+        };
+        saveAdminSession();
+        await loadFavorites();
+        updateUI();
+        renderAll();
+        closeAuth();
+        if (messageNode) messageNode.textContent = "Admin successfully signed in.";
         return;
     }
 
@@ -309,23 +691,70 @@ async function login() {
         return;
     }
 
+    if (error.message.includes("Email not confirmed")) {
+    messageNode.textContent = "Confirm your email or contact the administrator.";
+    return;
+}
+
     currentUser = data.user;
+    if (currentUser?.email?.toLowerCase() === ADMIN_EMAIL) {
+        saveAdminSession();
+    } else {
+        clearAdminSession();
+    }
+    await ensureProfile(currentUser);
+    await updateLastSeen(currentUser?.id);
     await loadFavorites();
     updateUI();
     renderAll();
     closeAuth();
+    alert("Logged in successfully!");
+}
+
+async function updateLastSeen(userId) {
+    if (!userId) return;
+    try {
+        const { error } = await supabase
+            .from("profiles")
+            .update({ last_seen: new Date().toISOString() })
+            .eq("id", userId);
+        if (error) {
+            if (!error.message.toLowerCase().includes("last_seen")) {
+                console.warn("Unable to update last seen:", error);
+            }
+        }
+    } catch (error) {
+        console.warn("Unable to update last seen:", error);
+    }
 }
 
 async function createProfile(userId, name, username, email) {
-    const { error } = await supabase.from("profiles").insert({
-        id: userId,
-        name,
-        username,
-        email
-    });
+    const { error } = await supabase.from("profiles").upsert(
+        {
+            id: userId,
+            name,
+            username,
+            email
+        },
+        { onConflict: "id" }
+    );
     if (error) {
         console.warn("Unable to create profile:", error);
+        return false;
     }
+    return true;
+}
+
+function getRegisterErrorMessage(error) {
+    if (!error || !error.message) return "Registration failed. Please try again.";
+    const text = error.message.toLowerCase();
+    if (text.includes("rate limit") || text.includes("email rate limit")) {
+        return "There is a temporary delay in registration. Try logging in via Login or wait a few minutes.";
+    }
+    if (text.includes("already registered") || text.includes("already exists") || text.includes("duplicate")) {
+        return "This email is already registered. Try logging in via Login.";
+    }
+    return error.message;
 }
 
 async function register() {
@@ -346,21 +775,70 @@ async function register() {
     });
 
     if (error) {
-        if (messageNode) messageNode.textContent = error.message;
+        if (email.toLowerCase() === ADMIN_EMAIL) {
+            if (messageNode) messageNode.textContent = "Admin does not need to register. Use admin login credentials on the Login tab.";
+            switchTab("login");
+            return;
+        }
+        if (messageNode) messageNode.textContent = getRegisterErrorMessage(error);
         return;
     }
 
-    if (data.user) {
-        await createProfile(data.user.id, name, username, email);
+    if (data?.user) {
+        const created = await createProfile(data.user.id, name, username, email);
+        if (!created) {
+            if (messageNode) messageNode.textContent = "Користувача створено, але не вдалося зберегти профіль у таблиці.";
+            return;
+        }
         currentUser = data.user;
+        await ensureProfile(currentUser);
+        await updateLastSeen(currentUser.id);
         await loadFavorites();
         updateUI();
         renderAll();
         closeAuth();
-    } else {
-        if (messageNode) messageNode.textContent = "Check your email to confirm registration.";
+        return;
     }
+
+    if (messageNode) messageNode.textContent = "Registration successful. Please login to continue.";
+    switchTab("login");
 }
+
+function saveAdminSession() {
+    if (!window.localStorage) return;
+    localStorage.setItem("adminSession", "true");
+}
+
+function loadAdminSession() {
+    if (!window.localStorage) return null;
+    const isAdmin = localStorage.getItem("adminSession") === "true";
+    if (!isAdmin) return null;
+    return {
+        id: ADMIN_USER_ID,
+        email: ADMIN_EMAIL,
+        user_metadata: {
+            name: "Admin",
+            username: "admin"
+        }
+    };
+}
+
+function clearAdminSession() {
+    if (!window.localStorage) return;
+    localStorage.removeItem("adminSession");
+}
+
+async function getProfileByEmail(email) {
+    const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("email", email)
+        .limit(1);
+
+    if (error || !data || data.length === 0) return null;
+    return data[0];
+}
+
 
 function switchTab(tab) {
     const loginTab = document.getElementById("tabLogin");
@@ -383,7 +861,7 @@ async function showUsers() {
         openAuth("Admin login required");
         return;
     }
-    await loadUsersPanel();
+    window.location.href = "admin.html";
 }
 
 async function loadUsersPanel() {
@@ -445,22 +923,29 @@ function updateUI() {
 }
 
 async function logout() {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-        console.warn("Error signing out:", error);
+    try {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.warn("Error signing out:", error);
+        }
+    } catch (err) {
+        console.warn("Sign out failed:", err);
     }
 
     currentUser = null;
     favoriteBookIds = [];
+    clearAdminSession();
     updateUI();
     renderAll();
+    window.location.href = "index.html";
 }
 
 async function init() {
     const { data } = await supabase.auth.getSession();
-    currentUser = data?.session?.user ?? null;
+    currentUser = data?.session?.user ?? loadAdminSession();
     await loadBooks();
     if (currentUser) {
+        await ensureProfile(currentUser);
         await loadFavorites();
     }
     renderAll();
@@ -469,6 +954,7 @@ async function init() {
     supabase.auth.onAuthStateChange(async (_event, session) => {
         currentUser = session?.user ?? null;
         if (currentUser) {
+            await ensureProfile(currentUser);
             await loadFavorites();
         } else {
             favoriteBookIds = [];
@@ -478,10 +964,86 @@ async function init() {
     });
 }
 
+function showCreateUserForm() {
+    if (!currentUser || currentUser.email !== "admin@gmail.com") {
+        alert("Only admin can create users");
+        return;
+    }
+    const form = document.getElementById("createUserForm");
+    if (form) form.style.display = "block";
+}
+
+function hideCreateUserForm() {
+    const form = document.getElementById("createUserForm");
+    if (form) form.style.display = "none";
+}
+
+function clearCreateUserForm() {
+    document.getElementById("createName").value = "";
+    document.getElementById("createUsername").value = "";
+    document.getElementById("createEmail").value = "";
+    document.getElementById("createPassword").value = "";
+}
+
+async function createUser() {
+    if (!currentUser || currentUser.email !== "admin@gmail.com") {
+        alert("Only admin can create users");
+        return;
+    }
+
+    const name = document.getElementById("createName")?.value.trim();
+    const username = document.getElementById("createUsername")?.value.trim();
+    const email = document.getElementById("createEmail")?.value.trim();
+    const password = document.getElementById("createPassword")?.value.trim();
+
+    if (!name || !username || !email || !password) {
+        alert("Fill in all fields");
+        return;
+    }
+
+    try {
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password
+        });
+
+        if (error) {
+            alert("Error creating user: " + error.message);
+            return;
+        }
+
+        if (data.user) {
+            const created = await createProfile(
+                data.user.id,
+                name,
+                username,
+                email
+            );
+
+            if (!created) {
+                alert("User created in auth, but profile was not saved.");
+                return;
+            }
+
+            alert("User created successfully");
+
+            hideCreateUserForm();
+            clearCreateUserForm();
+
+            await loadAdminPanel();
+        }
+
+    } catch (err) {
+        console.error("Error creating user:", err);
+        alert("Error creating user");
+    }
+}
+
 window.openAuth = openAuth;
 window.closeAuth = closeAuth;
 window.toggleFavorite = toggleFavorite;
-window.toggleFavoritesModal = showFavoritesModal;
+window.showFavoritesModal = showFavoritesModal;
+window.closeFavoritesModal = closeFavoritesModal;
 window.login = login;
 window.register = register;
 window.showUsers = showUsers;
@@ -489,5 +1051,11 @@ window.logout = logout;
 window.switchTab = switchTab;
 window.openModal = openModal;
 window.closeUsersModal = closeUsersModal;
-
+window.handleAdminClick = handleAdminClick;
+window.showCreateUserForm = showCreateUserForm;
+window.hideCreateUserForm = hideCreateUserForm;
+window.createUser = createUser;
+window.clearCreateUserForm = clearCreateUserForm;
+window.deleteUser = deleteUser;
+window.closeAdminPanel = closeAdminPanel;
 window.addEventListener("DOMContentLoaded", init);
