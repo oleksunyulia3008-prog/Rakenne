@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>rakenne</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
    <div class="header-top">
         <div class="left-section">
-
             <div class="logo">
-                <img src="logo.jpg" alt="rakenne">
+                <img src="images/logo.jpg" alt="rakenne">
             </div>
-
             <div class="search-box">
                 <input type="text" placeholder="Search...">
             </div>
@@ -25,7 +21,7 @@
 
     <div id="authBtn" onclick="openAuth()">Authorization</div>
 
-    <div class="icon heart-top" onclick="toggleFavoritesModal()">
+    <div class="icon heart-top" onclick="showFavoritesModal()">
                 <svg viewBox="0 0 24 24" stroke-width="2">
                     <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
                 </svg>
@@ -57,19 +53,19 @@
         <a href="#">Content</a>
         <a href="#">Categories</a>
         <a href="#">Media</a>
-        <button id="usersBtn" style="display:none;" onclick="showUsers()">Users</button>
+        <a href="users.html" id="usersBtn" style="display:none;">Users</a>
     </div>
 
     <div class="ad-slider">
     <div class="slides">
         <div class="slide active">
-            <img src="ad1.png">
+            <img src="images/ad1.png" alt="Ad 1">
         </div>
         <div class="slide">
-            <img src="ad2.png">
+            <img src="images/ad2.png" alt="Ad 2">
         </div>
         <div class="slide">
-            <img src="ad3.png">
+            <img src="images/ad3.png" alt="Ad 3">
         </div>
     </div>
 
@@ -95,18 +91,18 @@
 </div>
 
 <div class="section">
-    <div class="novelty-title">Announcements</div>
-    <div class="books-row announcements-row"></div>
+    <div class="novelty-title">Mystery-Thriller</div>
+    <div class="books-row mystery-thriller-row"></div>
 </div>
 
 <div class="section">
-    <div class="novelty-title">Educational</div>
-    <div class="books-row educational-row"></div>
+    <div class="novelty-title">Romance</div>
+    <div class="books-row romance-row"></div>
 </div>
 
 <div class="section">
-    <div class="novelty-title">Other</div>
-    <div class="books-row other-row"></div>
+    <div class="novelty-title">Fantasy</div>
+    <div class="books-row fantasy-row"></div>
 </div>
 
 </div>
@@ -116,7 +112,7 @@
             <div class="close-btn" onclick="closeModal()">✖️</div>
             <div class="modal-content">
                 <div class="modal-left">
-                    <img src="" alt="book">
+                    <img src="images/book.jpg" alt="book"> <!-- Використовуємо defaultBookImage -->
                 </div>
                 <div class="modal-right">
                     <h2 class="modal-title"></h2>
@@ -160,6 +156,30 @@
     </div>
 </div>
 
+<!-- Favorites Modal -->
+<div class="modal favorites-modal" id="favoritesModal">
+    <div class="modal-box">
+        <div class="close-btn" onclick="closeFavoritesModal()">✖️</div>
+        <div class="favorites-modal-content">
+            <h2>Your Favorites</h2>
+            <p class="favorites-modal-message"></p>
+        </div>
+        <div class="books-row favorites-books-row">
+            <!-- Favorite books will be rendered here -->
+        </div>
+    </div>
+</div>
+
+<!-- Admin Modal (if it was intended to be a modal on index.html) -->
+<div class="modal" id="adminModal" style="display:none;">
+    <div class="modal-box">
+        <div class="close-btn" onclick="closeAdminPanel()">✖️</div>
+        <h2>Admin Panel</h2>
+        <div id="adminPanelInfo"></div>
+        <div id="adminUsersContent"></div>
+    </div>
+</div>
+
 <div class="modal users-modal" id="usersModal">
     <div class="modal-box">
         <div class="close-btn" onclick="closeUsersModal()">✖️</div>
@@ -168,7 +188,7 @@
     </div>
 </div>
 
-    <script type="module" src="./script.js"></script>
+
 
     <footer class="footer">
     <div class="footer-container">
@@ -208,5 +228,6 @@
     </div>
 </footer>
 
+<script type="module" src="script.js"></script>
 </body>
 </html>
