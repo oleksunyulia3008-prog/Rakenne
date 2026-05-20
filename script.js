@@ -104,6 +104,7 @@ const ADMIN_USER_ID = "admin-local";
 let currentUser = null;
 let favoriteBookIds = [];
 let books = [];
+let bookFavoriteCounts = {}; // Кількість додавань в обране для адміна
 let salesChartInstance = null; // Для зберігання екземпляра графіка
 
 let categories = {
@@ -125,7 +126,10 @@ function renderBooks(list, containerSelector) {
     container.innerHTML = "";
 
     list.forEach((book) => {
+        const isAdmin = currentUser?.email === ADMIN_EMAIL;
         const isFavorite = favoriteBookIds.includes(String(book.id));
+        const favCount = bookFavoriteCounts[String(book.id)] || 0;
+        
         const imageUrl = book.img
             ? String(book.img)
             : defaultBookImage;
@@ -142,15 +146,18 @@ function renderBooks(list, containerSelector) {
                     onerror="this.onerror=null;this.src='${defaultBookImage}';"
                 >
 
-                <button 
-                    class="heart-btn ${isFavorite ? "active" : ""}"
-                    data-book-id="${book.id}"
-                    onclick="event.stopPropagation(); toggleFavorite(this)"
-                >
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
-                    </svg>
-                </button>
+                ${isAdmin ? 
+                    `<div class="fav-count-badge" title="Total favorites">${favCount}</div>` :
+                    `<button 
+                        class="heart-btn ${isFavorite ? "active" : ""}"
+                        data-book-id="${book.id}"
+                        onclick="event.stopPropagation(); toggleFavorite(this)"
+                    >
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+                        </svg>
+                    </button>`
+                }
             </div>
 
             <div class="book-title">${book.title}</div>
@@ -270,6 +277,24 @@ async function loadFavorites() {
     }
 
     favoriteBookIds = (data || []).map((item) => String(item.book_id));
+}
+
+// Завантаження статистики всіх вподобань для адміна
+async function loadAllFavoriteCounts() {
+    if (currentUser?.email !== ADMIN_EMAIL) {
+        bookFavoriteCounts = {};
+        return;
+    }
+    const { data, error } = await supabase.from("favorites").select("book_id");
+    if (error) {
+        console.warn("Error loading global favorites count:", error);
+        return;
+    }
+    bookFavoriteCounts = (data || []).reduce((acc, fav) => {
+        const bid = String(fav.book_id);
+        acc[bid] = (acc[bid] || 0) + 1;
+        return acc;
+    }, {});
 }
 
 function getFavoriteBooks() {
@@ -537,6 +562,7 @@ function openModal(book) {
     modal.style.display = "block";
     document.body.style.overflow = "hidden"; // Disable background scrolling
     document.body.classList.add('modal-open-book');
+    renderSalesChart();
 }
 
 function renderSalesChart() {
@@ -791,6 +817,7 @@ async function login() {
         };
         saveAdminSession();
         await loadFavorites();
+        await loadAllFavoriteCounts();
         updateUI();
         renderAll();
         closeAuth();
@@ -822,6 +849,7 @@ async function login() {
     await ensureProfile(currentUser);
     await updateLastSeen(currentUser?.id);
     await loadFavorites();
+    if (currentUser?.email === ADMIN_EMAIL) await loadAllFavoriteCounts();
     updateUI();
     renderAll();
     closeAuth();
@@ -1064,6 +1092,7 @@ async function init() {
     if (currentUser) {
         await ensureProfile(currentUser);
         await loadFavorites();
+        if (currentUser.email === ADMIN_EMAIL) await loadAllFavoriteCounts();
     }
     renderAll();
     updateUI();
@@ -1078,6 +1107,7 @@ async function init() {
         if (currentUser) {
             await ensureProfile(currentUser);
             await loadFavorites();
+            if (currentUser.email === ADMIN_EMAIL) await loadAllFavoriteCounts();
         } else {
             favoriteBookIds = [];
         }
