@@ -595,12 +595,18 @@ function openAuth(message = "", tab = "login") {
     const msg = document.getElementById("authMessage");
     if (msg) msg.textContent = message;
     switchTab(tab);
-    if (modal) modal.style.display = "flex";
+    if (modal) {
+        modal.style.display = "flex";
+        document.body.classList.add('modal-open-book');
+        document.body.style.overflow = "hidden";
+    }
 }
 
 function closeAuth() {
     const modal = document.getElementById("authModal");
     if (modal) modal.style.display = "none";
+    document.body.classList.remove('modal-open-book');
+    document.body.style.overflow = "auto";
 }
 
 async function ensureProfile(user) {
