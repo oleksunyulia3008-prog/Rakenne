@@ -1,89 +1,89 @@
 import { supabase } from "./supabaseClient.js";
 
 const fallbackBooks = [
-    { id: "book-1", title: "Haunting Adeline", author: "Hayley Dee Carlton", img: "images/book1.jpg", category: "bestseller" },
-    { id: "book-2", title: "Crescent City. House of Earth and Blood", author: "Sarah J. Maas", img: "images/book2.png", category: "bestseller" },
-    { id: "book-3", title: "From Blood and Ash", author: "Jennifer L. Armentrout", img: "images/book3.png", category: "bestseller" },
-    { id: "book-4", title: "Gild", author: "Raven Kennedy", img: "images/book4.png", category: "bestseller" },
-    { id: "book-5", title: "A Touch of Darkness", author: "Scarlett St. Clair", img: "images/book5.png", category: "bestseller" },
-    { id: "book-6", title: "Buttons&Lace", author: "Penelope Sky", img: "images/book6.png", category: "bestseller" },
-    { id: "book-7", title: "Kingdom of the Wicked", author: "Kerri Maniscalco", img: "images/book7.jpeg", category: "bestseller" },
-    { id: "book-8", title: "Fourth Wing", author: "Rebecca Yarros", img: "images/book8.png", category: "bestseller" },
-    { id: "book-9", title: "Shatter Me", author: "Tahereh Mafi", img: "images/book9.png", category: "bestseller" }, // Assuming book9.png is a valid image
-    { id: "book-10", title: "A Good Girl's Guide to Murder", author: "Holly Jackson", img: "images/book10.png", category: "bestseller" }, // Assuming book10.png is a valid image
-    { id: "book-11", title: "The Surgeon", author: "Tess Gerritsen", img: "images/book11.jpg", category: "bestseller" },
-    { id: "book-12", title: "My Dark Romeo", author: "Parker S. Huntington, L.J.Shen", img: "images/book12.png", category: "bestseller" }, // Assuming book12.png is a valid image
-    { id: "book-13", title: "Five Survive", author: "Holly Jackson", img: "images/book13.png", category: "bestseller" }, // Assuming book13.png is a valid image
-    { id: "book-14", title: "Punk 57", author: "Penelope Douglas", img: "images/book14.png", category: "bestseller" }, // Assuming book14.png is a valid image
-    { id: "book-15", title: "If had been with me", author: "Laura Nowlin", img: "images/book15.png", category: "bestseller" }, // Assuming book15.png is a valid image
-    { id: "book-16", title: "Murder on the Orient Express", author: "Agatha Christie", img: "images/book16.jpg", category: "bestseller" }, // Assuming book16.jpg is a valid image
-    { id: "book-17", title: "Bound by Honor", author: "Cora Reilly", img: "images/book17.png", category: "bestseller" },
-    { id: "book-18", title: "Gothikana", author: "RuNyx", img: "images/book18.png", category: "bestseller" }, // Assuming book18.png is a valid image
-    { id: "book-19", title: "The Chemistry of Death", author: "Simon Beckett", img: "images/book19.png", category: "bestseller" },
-    { id: "book-20", title: "Pet Sematary", author: "Stephen King", img: "images/book20.jpg", category: "bestseller" }
+    { id: "book-1", title: "Haunting Adeline", author: "Hayley Dee Carlton", img: "images/book1.jpg", category: "bestseller", price: 13.50 },
+    { id: "book-2", title: "Crescent City. House of Earth and Blood", author: "Sarah J. Maas", img: "images/book2.png", category: "bestseller", price: 15.50 },
+    { id: "book-3", title: "From Blood and Ash", author: "Jennifer L. Armentrout", img: "images/book3.png", category: "bestseller", price: 14.50 },
+    { id: "book-4", title: "Gild", author: "Raven Kennedy", img: "images/book4.png", category: "bestseller", price: 12.25 },
+    { id: "book-5", title: "A Touch of Darkness", author: "Scarlett St. Clair", img: "images/book5.png", category: "bestseller", price: 11.25 },
+    { id: "book-6", title: "Buttons&Lace", author: "Penelope Sky", img: "images/book6.png", category: "bestseller", price: 12.75 },
+    { id: "book-7", title: "Kingdom of the Wicked", author: "Kerri Maniscalco", img: "images/book7.jpeg", category: "bestseller", price: 12.00 },
+    { id: "book-8", title: "Fourth Wing", author: "Rebecca Yarros", img: "images/book8.png", category: "bestseller", price: 16.25 },
+    { id: "book-9", title: "Shatter Me", author: "Tahereh Mafi", img: "images/book9.png", category: "bestseller", price: 10.50 },
+    { id: "book-10", title: "A Good Girl's Guide to Murder", author: "Holly Jackson", img: "images/book10.png", category: "bestseller", price: 11.50 },
+    { id: "book-11", title: "The Surgeon", author: "Tess Gerritsen", img: "images/book11.jpg", category: "bestseller", price: 9.75 },
+    { id: "book-12", title: "My Dark Romeo", author: "Parker S. Huntington, L.J.Shen", img: "images/book12.png", category: "bestseller", price: 13.25 },
+    { id: "book-13", title: "Five Survive", author: "Holly Jackson", img: "images/book13.png", category: "bestseller", price: 11.75 },
+    { id: "book-14", title: "Punk 57", author: "Penelope Douglas", img: "images/book14.png", category: "bestseller", price: 13.00 },
+    { id: "book-15", title: "If had been with me", author: "Laura Nowlin", img: "images/book15.png", category: "bestseller", price: 10.25 },
+    { id: "book-16", title: "Murder on the Orient Express", author: "Agatha Christie", img: "images/book16.jpg", category: "bestseller", price: 8.75 },
+    { id: "book-17", title: "Bound by Honor", author: "Cora Reilly", img: "images/book17.png", category: "bestseller", price: 11.00 },
+    { id: "book-18", title: "Gothikana", author: "RuNyx", img: "images/book18.png", category: "bestseller", price: 14.00 },
+    { id: "book-19", title: "The Chemistry of Death", author: "Simon Beckett", img: "images/book19.png", category: "bestseller", price: 9.50 },
+    { id: "book-20", title: "Pet Sematary", author: "Stephen King", img: "images/book20.jpg", category: "bestseller", price: 10.75 }
 ];
 
 const fallbackNoveltyBooks = [
-    { id: "novelty-1", title: "Starside", author: "Alex Aster", img: "images/novelty1.jpg", category: "novelty" }, // Assuming novelty1.jpg is a valid image
-    { id: "novelty-2", title: "Forbidden Alchemy", author: "Stacey McEwan", img: "images/novelty2.jpg", category: "novelty" }, // Assuming novelty2.jpg is a valid image
-    { id: "novelty-3", title: "A Forsaken Prophecy", author: "Stacey McEwan", img: "images/novelty3.jpg", category: "novelty" }, // Assuming novelty3.jpg is a valid image
-    { id: "novelty-4", title: "Daggermouth", author: "H.M.Wolfe", img: "images/novelty4.webp", category: "novelty" }, // Assuming novelty4.webp is a valid image
-    { id: "novelty-5", title: "With Hearts of Flame", author: "Briar Boleyn", img: "images/novelty5.jpg", category: "novelty" }, // Assuming novelty5.jpg is a valid image
-    { id: "novelty-6", title: "Dire Bound", author: "Sable Sorensen", img: "images/novelty6.jpg", category: "novelty" }, // Assuming novelty6.jpg is a valid image
-    { id: "novelty-7", title: "Eldritch", author: "Keri Lake", img: "images/novelty7.webp", category: "novelty" }, // Assuming novelty7.webp is a valid image
-    { id: "novelty-8", title: "Vine of Hearts", author: "Julie Soto", img: "images/novelty8.webp", category: "novelty" }, // Assuming novelty8.webp is a valid image
-    { id: "novelty-9", title: "Cursed City", author: "Kate Golden", img: "images/novelty9.jpg", category: "novelty" }, // Assuming novelty9.jpg is a valid image
-    { id: "novelty-10", title: "The Wrath Gods Reap", author: "Abigall Owen", img: "images/novelty10.jpg", category: "novelty" } // Assuming novelty10.jpg is a valid image
+    { id: "novelty-1", title: "Starside", author: "Alex Aster", img: "images/novelty1.jpg", category: "novelty", price: 14.75 },
+    { id: "novelty-2", title: "Forbidden Alchemy", author: "Stacey McEwan", img: "images/novelty2.jpg", category: "novelty", price: 14.40 },
+    { id: "novelty-3", title: "A Forsaken Prophecy", author: "Stacey McEwan", img: "images/novelty3.jpg", category: "novelty", price: 14.40 },
+    { id: "novelty-4", title: "Daggermouth", author: "H.M.Wolfe", img: "images/novelty4.webp", category: "novelty", price: 12.40 },
+    { id: "novelty-5", title: "With Hearts of Flame", author: "Briar Boleyn", img: "images/novelty5.jpg", category: "novelty", price: 12.75 },
+    { id: "novelty-6", title: "Dire Bound", author: "Sable Sorensen", img: "images/novelty6.jpg", category: "novelty", price: 12.15 },
+    { id: "novelty-7", title: "Eldritch", author: "Keri Lake", img: "images/novelty7.webp", category: "novelty", price: 15.50 },
+    { id: "novelty-8", title: "Vine of Hearts", author: "Julie Soto", img: "images/novelty8.webp", category: "novelty", price: 11.50 },
+    { id: "novelty-9", title: "Cursed City", author: "Kate Golden", img: "images/novelty9.jpg", category: "novelty", price: 13.40 },
+    { id: "novelty-10", title: "The Wrath Gods Reap", author: "Abigall Owen", img: "images/novelty10.jpg", category: "novelty", price: 13.75 }
 ];
 
 const fallbackFictionBooks = [
-    { id: "fiction-1", title: "Kirill", author: "Lilian Harris", img: "images/fiction1.jpg", category: "fiction" }, // Assuming fiction1.jpg is a valid image
-    { id: "fiction-2", title: "Fury Bound", author: "Sable Sorensen", img: "images/fiction2.webp", category: "fiction" }, // Assuming fiction2.webp is a valid image
-    { id: "fiction-3", title: "My Dreadeul Darling", author: "H.D.Carlton", img: "images/fiction3.jpg", category: "fiction" }, // Assuming fiction3.jpg is a valid image
-    { id: "fiction-4", title: "Between Tides&Thunder", author: "Leena Kazak", img: "images/fiction4.jpg", category: "fiction" }, // Assuming fiction4.jpg is a valid image
-    { id: "fiction-5", title: "Black House", author: "Stephen King and Peter Straub", img: "images/fiction5.jpg", category: "fiction" }, // Assuming fiction5.jpg is a valid image
-    { id: "fiction-6", title: "If Walls Could Talk", author: "Jean Grainger", img: "images/fiction6.jpg", category: "fiction" }, // Assuming fiction6.jpg is a valid image
-    { id: "fiction-7", title: "You'll Miss Me When I'm Gone", author: "A.R.Torre", img: "images/fiction7.webp", category: "fiction" }, // Assuming fiction7.webp is a valid image
-    { id: "fiction-8", title: "Possessive Enemy", author: "Michelle Heard", img: "images/fiction8.jpg", category: "fiction" }, // Assuming fiction8.jpg is a valid image
-    { id: "fiction-9",  title: "The Dinner Party", author: "Freida mcFadden", img: "images/fiction9.webp", category: "fiction" }, // Assuming fiction9.webp is a valid image
-    { id: "fiction-10", title: "Mistborn", author: "Brandon Sanderson", img: "images/fiction10.jpg", category: "fiction" } // Assuming fiction10.jpg is a valid image
+    { id: "fiction-1", title: "Kirill", author: "Lilian Harris", img: "images/fiction1.jpg", category: "fiction", price: 10.25 },
+    { id: "fiction-2", title: "Fury Bound", author: "Sable Sorensen", img: "images/fiction2.webp", category: "fiction", price: 9.50 },
+    { id: "fiction-3", title: "My Dreadeul Darling", author: "H.D.Carlton", img: "images/fiction3.jpg", category: "fiction", price: 11.25 },
+    { id: "fiction-4", title: "Between Tides&Thunder", author: "Leena Kazak", img: "images/fiction4.jpg", category: "fiction", price: 9.90 },
+    { id: "fiction-5", title: "Black House", author: "Stephen King and Peter Straub", img: "images/fiction5.jpg", category: "fiction", price: 13.00 },
+    { id: "fiction-6", title: "If Walls Could Talk", author: "Jean Grainger", img: "images/fiction6.jpg", category: "fiction", price: 8.50 },
+    { id: "fiction-7", title: "You'll Miss Me When I'm Gone", author: "A.R.Torre", img: "images/fiction7.webp", category: "fiction", price: 10.75 },
+    { id: "fiction-8", title: "Possessive Enemy", author: "Michelle Heard", img: "images/fiction8.jpg", category: "fiction", price: 10.40 },
+    { id: "fiction-9",  title: "The Dinner Party", author: "Freida mcFadden", img: "images/fiction9.webp", category: "fiction", price: 9.75 },
+    { id: "fiction-10", title: "Mistborn", author: "Brandon Sanderson", img: "images/fiction10.jpg", category: "fiction", price: 14.50 }
 ];
 
 const fallbackMysteryThrillerBooks = [
-    { id: "mystery-thriller-1", title: "Boardroom Mask", author: "Nicole Fox", img: "images/mystery-thriller1.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller1.jpg is a valid image
-    { id: "mystery-thriller-2", title: "You Can Tell Me", author: "Melinda Leigh", img: "images/mystery-thriller2.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller2.jpg is a valid image
-    { id: "mystery-thriller-3", title: "The Final System", author: "Anthony Tardiff", img: "images/mystery-thriller3.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller3.jpg is a valid image
-    { id: "mystery-thriller-4", title: "The Missing One", author: "A.R.Torre", img: "images/mystery-thriller4.webp", category: "mystery-thriller" }, // Assuming mystery-thriller4.webp is a valid image
-    { id: "mystery-thriller-5", title: "The Final Target", author: "Nora Roberts", img: "images/mystery-thriller5.webp", category: "mystery-thriller" }, // Assuming mystery-thriller5.webp is a valid image
-    { id: "mystery-thriller-6", title: "The Keeper", author: "Tana French", img: "images/mystery-thriller6.webp", category: "mystery-thriller" }, // Assuming mystery-thriller6.webp is a valid image
-    { id: "mystery-thriller-7", title: "Origin", author: "Dan Brown", img: "images/mystery-thriller7.webp", category: "mystery-thriller" }, // Assuming mystery-thriller7.webp is a valid image
-    { id: "mystery-thriller-8", title: "God of War", author: "Rina Kent", img: "images/mystery-thriller8.webp", category: "mystery-thriller" }, // Assuming mystery-thriller8.webp is a valid image
-    { id: "mystery-thriller-9", title: "Heart of my Monster", author: "Rina Kent", img: "images/mystery-thriller9.jpg", category: "mystery-thriller" }, // Assuming mystery-thriller9.jpg is a valid image
-    { id: "mystery-thriller-10", title: "Throne of Power", author: "Rina Kent", img: "images/mystery-thriller10.jpg", category: "mystery-thriller" } // Assuming mystery-thriller10.jpg is a valid image
+    { id: "mystery-thriller-1", title: "Boardroom Mask", author: "Nicole Fox", img: "images/mystery-thriller1.jpg", category: "mystery-thriller", price: 10.50 },
+    { id: "mystery-thriller-2", title: "You Can Tell Me", author: "Melinda Leigh", img: "images/mystery-thriller2.jpg", category: "mystery-thriller", price: 9.90 },
+    { id: "mystery-thriller-3", title: "The Final System", author: "Anthony Tardiff", img: "images/mystery-thriller3.jpg", category: "mystery-thriller", price: 11.50 },
+    { id: "mystery-thriller-4", title: "The Missing One", author: "A.R.Torre", img: "images/mystery-thriller4.webp", category: "mystery-thriller", price: 11.00 },
+    { id: "mystery-thriller-5", title: "The Final Target", author: "Nora Roberts", img: "images/mystery-thriller5.webp", category: "mystery-thriller", price: 12.75 },
+    { id: "mystery-thriller-6", title: "The Keeper", author: "Tana French", img: "images/mystery-thriller6.webp", category: "mystery-thriller", price: 12.00 },
+    { id: "mystery-thriller-7", title: "Origin", author: "Dan Brown", img: "images/mystery-thriller7.webp", category: "mystery-thriller", price: 13.75 },
+    { id: "mystery-thriller-8", title: "God of War", author: "Rina Kent", img: "images/mystery-thriller8.webp", category: "mystery-thriller", price: 12.25 },
+    { id: "mystery-thriller-9", title: "Heart of my Monster", author: "Rina Kent", img: "images/mystery-thriller9.jpg", category: "mystery-thriller", price: 12.25 },
+    { id: "mystery-thriller-10", title: "Throne of Power", author: "Rina Kent", img: "images/mystery-thriller10.jpg", category: "mystery-thriller", price: 12.25 }
 ];
 
 const fallbackRomanceBooks = [
-    { id: "romance-1", title: "Rites of the Starling", author: "Devney Perry", img: "images/romance1.jpg", category: "romance" }, // Assuming romance1.jpg is a valid image
-    { id: "romance-2", title: "Crown Me Yours", author: "Liv Zander", img: "images/romance2.webp", category: "romance" }, // Assuming romance2.webp is a valid image
-    { id: "romance-3", title: "Inked in Betrayal", author: "Victoria Paige", img: "images/romance3.jpg", category: "romance" }, // Assuming romance3.jpg is a valid image
-    { id: "romance-4", title: "Trauma Bonded", author: "Jaymin Eve & Tate James", img: "images/romance4.webp", category: "romance" }, // Assuming romance4.webp is a valid image
-    { id: "romance-5", title: "Beautiful Graves", author: "L.J.Shen", img: "images/romance5.webp", category: "romance" }, // Assuming romance5.webp is a valid image
-    { id: "romance-6", title: "Law Maker", author: "Susie Tate", img: "images/romance6.webp", category: "romance" }, // Assuming romance6.webp is a valid image
-    { id: "romance-7", title: "Wicked Sanctuary", author: "Jane Henry", img: "images/romance7.webp", category: "romance" }, // Assuming romance7.webp is a valid image
-    { id: "romance-8", title: "Love in the Afternoon", author: "Lisa Kleypas", img: "images/romance8.webp", category: "romance" }, // Assuming romance8.webp is a valid image
-    { id: "romance-9", title: "Variation", author: "Rebecca Yarros", img: "images/romance9.webp", category: "romance" }, // Assuming romance9.webp is a valid image
-    { id: "romance-10", title: "Keeping 13", author: "Chloe Walsh", img: "images/romance10.webp", category: "romance" } // Assuming romance10.webp is a valid image
+    { id: "romance-1", title: "Rites of the Starling", author: "Devney Perry", img: "images/romance1.jpg", category: "romance", price: 9.50 },
+    { id: "romance-2", title: "Crown Me Yours", author: "Liv Zander", img: "images/romance2.webp", category: "romance", price: 10.50 },
+    { id: "romance-3", title: "Inked in Betrayal", author: "Victoria Paige", img: "images/romance3.jpg", category: "romance", price: 9.00 },
+    { id: "romance-4", title: "Trauma Bonded", author: "Jaymin Eve & Tate James", img: "images/romance4.webp", category: "romance", price: 11.25 },
+    { id: "romance-5", title: "Beautiful Graves", author: "L.J.Shen", img: "images/romance5.webp", category: "romance", price: 9.75 },
+    { id: "romance-6", title: "Law Maker", author: "Susie Tate", img: "images/romance6.webp", category: "romance", price: 9.25 },
+    { id: "romance-7", title: "Wicked Sanctuary", author: "Jane Henry", img: "images/romance7.webp", category: "romance", price: 10.25 },
+    { id: "romance-8", title: "Love in the Afternoon", author: "Lisa Kleypas", img: "images/romance8.webp", category: "romance", price: 8.00 },
+    { id: "romance-9", title: "Variation", author: "Rebecca Yarros", img: "images/romance9.webp", category: "romance", price: 11.00 },
+    { id: "romance-10", title: "Keeping 13", author: "Chloe Walsh", img: "images/romance10.webp", category: "romance", price: 12.00 }
 ];
 
 const fallbackFantasyBooks = [
-    { id: "fantasy-1", title: "Fated of the Wolf Maiden", author: "April l.Moon", img: "images/fantasy1.webp", category: "fantasy" }, // Assuming fantasy1.webp is a valid image
-    { id: "fantasy-2", title: "King of Gluttony", author: "Ana Huang", img: "images/fantasy2.webp", category: "fantasy" }, // Assuming fantasy2.webp is a valid image
-    { id: "fantasy-3", title: "The Nightmare in HIM", author: "Suzanne Wright", img: "images/fantasy3.jpg", category: "fantasy" }, // Assuming fantasy3.jpg is a valid image
-    { id: "fantasy-4", title: "While the Dark Remains", author: "Joanna Ruth Meyer", img: "images/fantasy4.webp", category: "fantasy" }, // Assuming fantasy4.webp is a valid image
-    { id: "fantasy-5", title: "The People's Library", author: "Veronica G.Henry", img: "images/fantasy5.webp", category: "fantasy" }, // Assuming fantasy5.webp is a valid image
-    { id: "fantasy-6", title: "The Shattered King", author: "Charlie N.Holmberg", img: "images/fantasy6.webp", category: "fantasy" }, // Assuming fantasy6.webp is a valid image
-    { id: "fantasy-7", title: "Rune Breaker", author: "Mila Finch", img: "images/fantasy7.webp", category: "fantasy" }, // Assuming fantasy7.webp is a valid image
-    { id: "fantasy-8", title: "Wild Scottish Magic", author: "Tricia O'Malley", img: "images/fantasy8.webp", category: "fantasy" } // Assuming fantasy8.webp is a valid image
+    { id: "fantasy-1", title: "Fated of the Wolf Maiden", author: "April l.Moon", img: "images/fantasy1.webp", category: "fantasy", price: 12.40 },
+    { id: "fantasy-2", title: "King of Gluttony", author: "Ana Huang", img: "images/fantasy2.webp", category: "fantasy", price: 12.75 },
+    { id: "fantasy-3", title: "The Nightmare in HIM", author: "Suzanne Wright", img: "images/fantasy3.jpg", category: "fantasy", price: 11.75 },
+    { id: "fantasy-4", title: "While the Dark Remains", author: "Joanna Ruth Meyer", img: "images/fantasy4.webp", category: "fantasy", price: 11.00 },
+    { id: "fantasy-5", title: "The People's Library", author: "Veronica G.Henry", img: "images/fantasy5.webp", category: "fantasy", price: 13.25 },
+    { id: "fantasy-6", title: "The Shattered King", author: "Charlie N.Holmberg", img: "images/fantasy6.webp", category: "fantasy", price: 12.00 },
+    { id: "fantasy-7", title: "Rune Breaker", author: "Mila Finch", img: "images/fantasy7.webp", category: "fantasy", price: 14.00 },
+    { id: "fantasy-8", title: "Wild Scottish Magic", author: "Tricia O'Malley", img: "images/fantasy8.webp", category: "fantasy", price: 10.50 }
 ];
 
 const fallbackAllBooks = [ 
@@ -104,6 +104,8 @@ const ADMIN_USER_ID = "admin-local";
 let currentUser = null;
 let favoriteBookIds = [];
 let books = [];
+let salesChartInstance = null; // Для зберігання екземпляра графіка
+
 let categories = {
     novelty: [],
     fiction: [],
@@ -462,6 +464,7 @@ function openModal(book) {
     const modalImage = document.querySelector(".modal-left img");
     const title = document.querySelector(".modal-title");
     const author = document.querySelector(".modal-author");
+    const price = document.querySelector(".modal-price");
 
     if (!modal || !modalImage || !title || !author) return;
 
@@ -473,14 +476,60 @@ function openModal(book) {
     };
     title.textContent = book.title;
     author.textContent = `by ${book.author}`;
+    
+    if (price) {
+        price.textContent = `Price: $${(book.price || 11.25).toFixed(2)}`;
+    }
+
+    // Викликаємо функцію для малювання професійного графіка
+    renderSalesChart();
+
     modal.style.display = "block";
+    document.body.style.overflow = "hidden"; // Disable background scrolling
+}
+
+function renderSalesChart() {
+    const canvas = document.getElementById('salesChart');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Якщо графік уже існує, видаляємо його перед створенням нового
+    if (salesChartInstance) {
+        salesChartInstance.destroy();
+    }
+
+    salesChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Monthly Sales',
+                data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 50) + 10),
+                backgroundColor: 'rgba(107, 59, 59, 0.6)', // Гармонійний колір #6b3b3b з прозорістю
+                borderColor: 'rgba(107, 59, 59, 1)',
+                borderWidth: 1,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
 }
 
 function closeModal() {
     const modal = document.getElementById("modal");
-    if (modal) {
-        modal.style.display = "none";
-    }
+    if (modal) modal.style.display = "none";
+    document.body.style.overflow = "auto"; // Re-enable scrolling
 }
 
 function openAuth(message = "", tab = "login") {
@@ -787,7 +836,7 @@ async function register() {
     if (data?.user) {
         const created = await createProfile(data.user.id, name, username, email);
         if (!created) {
-            if (messageNode) messageNode.textContent = "Користувача створено, але не вдалося зберегти профіль у таблиці.";
+            if (messageNode) messageNode.textContent = "User created, but profile could not be saved to the table.";
             return;
         }
         currentUser = data.user;
@@ -1050,6 +1099,7 @@ window.showUsers = showUsers;
 window.logout = logout;
 window.switchTab = switchTab;
 window.openModal = openModal;
+window.closeModal = closeModal;
 window.closeUsersModal = closeUsersModal;
 window.handleAdminClick = handleAdminClick;
 window.showCreateUserForm = showCreateUserForm;
