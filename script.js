@@ -16,7 +16,7 @@ const fallbackBooks = [
     { id: "book-13", title: "Five Survive", author: "Holly Jackson", img: "images/book13.png", category: "bestseller", price: 11.75 },
     { id: "book-14", title: "Punk 57", author: "Penelope Douglas", img: "images/book14.png", category: "bestseller", price: 13.00 },
     { id: "book-15", title: "If had been with me", author: "Laura Nowlin", img: "images/book15.png", category: "bestseller", price: 10.25 },
-    { id: "book-16", title: "Murder on the Orient Express", author: "Agatha Christie", img: "images/book16.jpg", category: "bestseller", price: 8.75 },
+    { id: "book-16", title: "Murder on the Orient Express", author: "Agatha Christie", img: "images/book16.png", category: "bestseller", price: 8.75 },
     { id: "book-17", title: "Bound by Honor", author: "Cora Reilly", img: "images/book17.png", category: "bestseller", price: 11.00 },
     { id: "book-18", title: "Gothikana", author: "RuNyx", img: "images/book18.png", category: "bestseller", price: 14.00 },
     { id: "book-19", title: "The Chemistry of Death", author: "Simon Beckett", img: "images/book19.png", category: "bestseller", price: 9.50 },
@@ -457,6 +457,56 @@ function renderAll() {
     renderBooks(categories.mysterythriller, ".mystery-thriller-row");
     renderBooks(categories.romance, ".romance-row");
     renderBooks(categories.fantasy, ".fantasy-row");
+}
+
+function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+        // Офсет (110px) потрібен, щоб верхнє меню не закривало заголовок розділу
+        const offset = 110;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
+function handleSearch(query) {
+    const q = query.toLowerCase().trim();
+    const slider = document.querySelector('.ad-slider');
+    
+    if (!q) {
+        // Повертаємо все до початкового стану, якщо пошуковий запит порожній
+        if (slider) slider.style.display = 'block';
+        document.querySelectorAll('.section').forEach(s => s.style.display = 'block');
+        renderAll();
+        return;
+    }
+
+    // Приховуємо слайдер під час пошуку
+    if (slider) slider.style.display = 'none';
+
+    const filterAndRender = (list, selector, sectionId) => {
+        const filtered = list.filter(b => 
+            b.title.toLowerCase().includes(q) || 
+            b.author.toLowerCase().includes(q)
+        );
+        renderBooks(filtered, selector);
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.style.display = filtered.length > 0 ? 'block' : 'none';
+        }
+    };
+
+    filterAndRender(books, ".books-row", "bestsellers-sec");
+    filterAndRender(categories.novelty, ".novelty-row", "novelty-sec");
+    filterAndRender(categories.fiction, ".fiction-row", "fiction-sec");
+    filterAndRender(categories.mysterythriller, ".mystery-thriller-row", "mystery-sec");
+    filterAndRender(categories.romance, ".romance-row", "romance-sec");
+    filterAndRender(categories.fantasy, ".fantasy-row", "fantasy-sec");
 }
 
 function openModal(book) {
@@ -1012,6 +1062,11 @@ async function init() {
     renderAll();
     updateUI();
 
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => handleSearch(e.target.value));
+    }
+
     supabase.auth.onAuthStateChange(async (_event, session) => {
         currentUser = session?.user ?? null;
         if (currentUser) {
@@ -1111,6 +1166,7 @@ window.showUsers = showUsers;
 window.logout = logout;
 window.switchTab = switchTab;
 window.openModal = openModal;
+window.scrollToSection = scrollToSection;
 window.closeModal = closeModal;
 window.closeUsersModal = closeUsersModal;
 window.handleAdminClick = handleAdminClick;
