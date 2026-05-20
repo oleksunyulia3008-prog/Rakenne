@@ -32,6 +32,14 @@ body {
     border-radius: 20px;
     border: none;
     background: #dcdde1;
+    transition: width 0.4s ease, background-color 0.3s ease;
+    outline: none;
+}
+
+.search-box input:focus {
+    width: 400px;
+    background-color: #f1f2f6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header-icons {
@@ -54,16 +62,96 @@ body {
 
 .header-bottom {
     display: flex;
-    gap: 25px;
-    padding: 10px 30px;
-    background: #f1f2f6;
-    border-top: 1px solid #ccc;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px 30px;
+    background: #ffffff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
 
-.header-bottom a {
+.header-bottom a,
+.nav-link {
     text-decoration: none;
-    color: #333;
+    color: #555;
     font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.header-bottom a:hover,
+.nav-link:hover {
+    color: #6b3b3b;
+    background: transparent;
+}
+
+.header-bottom a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #6b3b3b;
+    transition: width 0.3s ease;
+}
+
+.header-bottom a:hover::after {
+    width: 100%;
+}
+
+.nav-item {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 10px 0;
+    display: none;
+    flex-direction: column;
+    z-index: 3000;
+    border: 1px solid #eee;
+    margin-top: 5px;
+}
+
+.nav-item:hover .dropdown-menu {
+    display: flex;
+}
+
+.dropdown-menu a {
+    padding: 10px 20px !important;
+    text-transform: none !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    color: #666 !important;
+    letter-spacing: 0.2px !important;
+}
+
+.dropdown-menu a::after {
+    display: none; /* Прибираємо лінію підкреслення для пунктів меню */
+}
+
+.dropdown-menu a:hover {
+    background-color: #f9f9f9;
+    color: #6b3b3b !important;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .main {
@@ -79,6 +167,7 @@ body {
 .background-title {
     position: absolute;
     top: 30px;               
+    top: 10px;               
     left: 50%;
     transform: translate(-50%);
 
@@ -100,6 +189,7 @@ body {
 .section .background-title {
     position: absolute;
     top: 40px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 120px;
@@ -115,6 +205,7 @@ body {
 .modal .background-title {
     position: absolute;
     top: 40px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -131,9 +222,8 @@ body {
 .modal-content {
     position: relative;
     z-index: 2;
-
-    max-height: calc(100vh - 120px);
-    overflow-y: hidden;
+    max-height: none;
+    overflow-y: visible;
 }
 
 .modal-books-row {
@@ -165,6 +255,7 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     padding-top: 120px; 
+    padding-top: 40px; /* Зменшено, щоб книги було видно краще */
 }
 
 .books-row::-webkit-scrollbar {
@@ -182,6 +273,12 @@ body {
     padding: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.book-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 .book-image {
@@ -250,6 +347,82 @@ body {
     color: gray;
 }
 
+.admin-page {
+    padding-top: 20px;
+}
+
+.admin-panel-header {
+    margin-bottom: 20px;
+}
+
+.admin-info {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.admin-info-row {
+    font-size: 14px;
+    color: #333;
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.admin-user-card {
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.admin-user-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.admin-user-card-header strong {
+    font-size: 16px;
+}
+
+.admin-user-card-header p {
+    margin: 4px 0 0;
+    color: #555;
+}
+
+.admin-user-card-info {
+    display: grid;
+    gap: 10px;
+    color: #444;
+    font-size: 14px;
+}
+
+.admin-user-card-actions {
+    margin-top: 14px;
+}
+
+.admin-user-card-actions button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #d9534f;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.admin-user-card-actions button:hover {
+    background: #c9302c;
+}
+
 .modal {
     position: fixed;
     top: 0;
@@ -264,7 +437,7 @@ body {
 
 .modal-box {
     position: relative;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     background: white;
     border-radius: 12px;
@@ -285,10 +458,22 @@ body {
 .modal-left img {
     width: 250px;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .modal-right {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-details {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .modal-title {
@@ -308,14 +493,27 @@ body {
 }
 
 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    z-index: 3000;
     cursor: pointer;
     font-size: 20px;
-    background: none;
+    background: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
-    padding: 5px;
+    color: #6b3b3b;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+.close-btn:hover {
+    transform: scale(1.2);
 }
 
 .modal .section {
@@ -323,12 +521,56 @@ body {
 }
 
 .modal .background-title {
-    font-size: 80px;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 120px;
+    color: black;
     opacity: 0.05;
+    z-index: 1;
 }
 
 .modal-books-row {
     padding-top: 60px;
+}
+
+.favorites-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    padding: 40px;
+    z-index: 999;
+}
+
+.favorites-modal .modal-box {
+    max-width: 900px;
+    width: 100%;
+}
+
+.favorites-modal-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.favorites-modal-message {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.favorites-books-row {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 10px;
 }
 
 .auth-modal {
@@ -373,6 +615,30 @@ body {
     top: 15px;
     right: 20px;
     cursor: pointer;
+    color: #6b3b3b;
+    font-weight: bold;
+    font-size: 20px;
+    background: none;
+    border: none;
+}
+
+.close-auth {
+    position: fixed; /* Змінено з absolute на fixed */
+    top: 20px; /* Залишається зверху для повноекранного модального вікна */
+    right: 40px;
+    cursor: pointer;
+    color: #6b3b3b;
+    font-weight: bold;
+    font-size: 20px;
+    background: white; /* Додано фон для видимості */
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-books {
@@ -391,6 +657,7 @@ body {
 .novelty-title {
     position: absolute;
     top: 30px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -400,12 +667,26 @@ body {
     pointer-events: none;
 }
 
-.novelty-row {
+.novelty-row,
+.favorites-row {
     display: flex;
     gap: 20px;
     overflow-x: auto;
     overflow-y: hidden;
     padding-top: 80px;
+}
+
+.favorites-section {
+    position: relative;
+    margin-top: 60px;
+}
+
+.favorites-message {
+    margin: 20px 0 0;
+    color: #333;
+    font-size: 15px;
+    max-width: 780px;
+    line-height: 1.6;
 }
 
 #adminPanelBtn {
@@ -600,11 +881,13 @@ body {
 
 .ad-slider {
     position: relative;
-    width: 100vw;          
-    height: 450px;        
+    width: 95%; /* Залишаємо трохи місця по боках */
+    max-width: 1400px; /* Обмежуємо максимальну ширину */
+    height: 550px; /* Збільшено висоту */
     overflow: hidden;
-    margin: 0;
+    margin: 20px auto; /* Опускаємо нижче меню та центруємо */
     padding: 0;
+    border-radius: 15px;
 }
 
 .slides {
@@ -743,15 +1026,15 @@ body {
 
 .modal {
     position: fixed;
-    top: 0;             
+    top: 90px; /* Модальні вікна починаються нижче заголовка */
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 90px); /* Висота адаптується до решти вікна перегляду */
     background: #ebebeb;
     display: none;
     padding: 40px;
-    z-index: 1000;
-    overflow: hidden;
+    z-index: 2001; /* Забезпечуємо, що модальні вікна знаходяться над заголовком */
+    overflow-y: auto; /* Дозволяємо прокрутку всього вікна */
 }
 
 .modal-content {
@@ -772,45 +1055,103 @@ body.favorites-open .header-bottom {
 }
 
 .footer {
-    background: #f1f2f6;
-    padding: 40px 30px 20px;
+    background: #ffffff;
+    padding: 70px 30px 40px;
     margin-top: 60px;
+    border-top: 1px solid #eee;
 }
 
 .footer-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .footer-col {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     max-width: 250px;
+    flex: 1;
+    min-width: 200px;
 }
 
 .footer-col h3,
 .footer-col h4 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    color: #6b3b3b;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.footer-col a {
+.footer-col p, .footer-col a {
     text-decoration: none;
-    color: #333;
+    color: #777;
     font-size: 14px;
+    line-height: 1.6;
+    transition: all 0.3s ease;
 }
 
 .footer-col a:hover {
     color: #6b3b3b;
+    padding-left: 5px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: #777;
+}
+
+.contact-icon {
+    width: 20px;
+    height: 20px;
+    color: #6b3b3b;
+    flex-shrink: 0;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #f9f9f9;
+    border-radius: 50%;
+    color: #6b3b3b;
+    transition: all 0.3s ease;
+}
+
+.footer-socials a svg {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-socials a:hover {
+    background: #6b3b3b;
+    color: #fff;
+    transform: translateY(-5px);
 }
 
 .footer-bottom {
-    margin-top: 30px;
-    border-top: 1px solid #ccc;
-    padding-top: 15px;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #f5f5f5;
     text-align: center;
     font-size: 14px;
-    color: gray;
+    color: #bbb;
 }
