@@ -500,16 +500,17 @@ function renderSalesChart() {
     }
 
     salesChartInstance = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
             datasets: [{
                 label: 'Monthly Sales',
                 data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 50) + 10),
-                backgroundColor: 'rgba(107, 59, 59, 0.6)', // Гармонійний колір #6b3b3b з прозорістю
+                backgroundColor: 'rgba(107, 59, 59, 0.2)',
                 borderColor: 'rgba(107, 59, 59, 1)',
-                borderWidth: 1,
-                borderRadius: 5
+                borderWidth: 2, // Thicker line
+                fill: true, // Fill the area under the line
+                tension: 0.4 // Smooth curves
             }]
         },
         options: {
@@ -519,8 +520,13 @@ function renderSalesChart() {
                 legend: { display: false }
             },
             scales: {
-                y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
-                x: { grid: { display: false } }
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0,0,0,0.05)' }
+                },
+                x: {
+                    grid: { display: false }
+                }
             }
         }
     });
