@@ -198,6 +198,7 @@
 
 <div class="auth-modal" id="authModal">
     <div class="auth-box">
+        <div class="close-auth" onclick="closeAuth()">✖</div>
 
         <div class="auth-tabs">
             <div id="tabLogin" class="tab active" onclick="switchTab('login')">Login</div>
@@ -220,8 +221,6 @@
             <button onclick="register()">Register</button>
         </div>
         <div id="authMessage" class="auth-error"></div>
-
-        <div class="close-auth" onclick="closeAuth()">✖</div>
     </div>
 </div>
 
