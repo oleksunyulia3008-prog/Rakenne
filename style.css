@@ -494,7 +494,7 @@ body {
 
 .close-btn {
     position: fixed;
-    top: 100px;
+    top: 120px; /* Трохи нижче, щоб не перекривати меню */
     right: 40px;
     z-index: 3000;
     cursor: pointer;
@@ -536,15 +536,15 @@ body {
 }
 
 .favorites-modal {
-    position: fixed;
-    top: 0;
+    position: fixed; /* Keep fixed */
+    top: 102px; /* Вирівняно під висоту меню (58px + 44px) */
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
+    height: calc(100vh - 102px);
+    background: #ebebeb; /* Consistent background with book modal */
     display: none;
     padding: 40px;
-    z-index: 999;
+    z-index: 2001; /* Ensure it's above main content but below header */
 }
 
 .favorites-modal .modal-box {
@@ -563,6 +563,11 @@ body {
     margin: 0;
     color: #333;
     font-size: 16px;
+}
+
+.favorites-modal .close-btn {
+    /* Ensure the close button for favorites modal uses the general .close-btn styling */
+    position: fixed; /* Override any absolute positioning from .modal-box */
 }
 
 .favorites-books-row {
@@ -1026,10 +1031,10 @@ body {
 
 .modal {
     position: fixed;
-    top: 90px; /* Модальні вікна починаються нижче заголовка */
+    top: 102px; /* Починається точно під меню */
     left: 0;
     width: 100%;
-    height: calc(100vh - 90px); /* Висота адаптується до решти вікна перегляду */
+    height: calc(100vh - 102px);
     background: #ebebeb;
     display: none;
     padding: 40px;
@@ -1040,18 +1045,6 @@ body {
 .modal-content {
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-}
-
-body.favorites-open {
-    overflow: hidden;
-}
-
-body.favorites-open .ad-slider {
-    display: none;
-}
-
-body.favorites-open .header-bottom {
-    display: none;
 }
 
 .footer {
@@ -1156,7 +1149,20 @@ body.favorites-open .header-bottom {
     color: #bbb;
 }
 
-body.modal-open-book main,
-body.modal-open-book footer {
+body.modal-open-book .header-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2005;
+}
+body.modal-open-book .header-bottom {
+    position: fixed;
+    top: 58px; /* Висота header-top */
+    width: 100%;
+    z-index: 2004;
+}
+body.modal-open-book .main,
+body.modal-open-book .ad-slider,
+body.modal-open-book .footer {
     display: none;
 }
