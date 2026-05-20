@@ -486,6 +486,7 @@ function openModal(book) {
 
     modal.style.display = "block";
     document.body.style.overflow = "hidden"; // Disable background scrolling
+    document.body.classList.add('modal-open-book');
 }
 
 function renderSalesChart() {
@@ -536,6 +537,7 @@ function closeModal() {
     const modal = document.getElementById("modal");
     if (modal) modal.style.display = "none";
     document.body.style.overflow = "auto"; // Re-enable scrolling
+    document.body.classList.remove('modal-open-book');
 }
 
 function openAuth(message = "", tab = "login") {
@@ -662,6 +664,8 @@ function showFavoritesModal() {
     const favoriteBooks = getAllBooks().filter((book) => favoriteBookIds.includes(String(book.id)));
     container.innerHTML = "";
     modal.style.display = "block";
+    document.body.classList.add('modal-open-book'); // Add class to body to hide main content
+    document.body.style.overflow = "hidden"; // Disable background scrolling
 
     if (favoriteBooks.length === 0) {
         messageNode.textContent = "No favorites yet. Add a book by clicking the heart icon.";
@@ -706,6 +710,8 @@ function closeFavoritesModal() {
     if (modal) {
         modal.style.display = "none";
     }
+    document.body.classList.remove('modal-open-book'); // Remove class from body
+    document.body.style.overflow = "auto"; // Re-enable scrolling
 }
 
 async function login() {
