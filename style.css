@@ -359,6 +359,12 @@ body {
     margin-bottom: 20px;
     padding: 16px;
     background: #fff;
+    padding: 40px; /* Increased padding for better spacing */
+    max-width: 1200px; /* Max width for content readability */
+    margin: 20px auto; /* Center the content */
+    background: #ffffff; /* White background for the main content area */
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* More prominent shadow */
     border-radius: 14px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
@@ -366,19 +372,81 @@ body {
 .admin-info-row {
     font-size: 14px;
     color: #333;
+      font-size: 15px;
+    color: #444;
+    flex: 1; /* Allow items to grow */
+    min-width: 180px; /* Minimum width for wrapping */
+    text-align: center;
+}
+
+.admin-panel-header {
+    text-align: center; /* Center the header text */
+    margin-bottom: 40px; /* More space below header */
+}
+
+.admin-panel-header h1 {
+    font-size: 2.5em; /* Larger main title */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.admin-panel-header p {
+    font-size: 1.1em;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.admin-info {
+    margin-bottom: 30px; /* Increased margin */
+    padding: 20px; /* Increased padding */
+    background: #f9f9f9; /* Slightly off-white background */
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    display: flex; /* Use flexbox for info rows */
+    flex-wrap: wrap;
+    gap: 20px; /* Space between info items */
+    justify-content: space-around;
+}
+
+.admin-info-row strong {
+    color: #6b3b3b; /* Highlight strong text */
+}
+
+.admin-section {
+    margin-top: 40px; /* Space between sections */
+    padding-top: 20px;
+    border-top: 1px solid #eee; /* Separator line */
+}
+
+.admin-section h2.section-title { /* Added class for specific styling */
+    font-size: 2em; /* Section titles */
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 .users-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider cards */
+    gap: 25px; 
     gap: 20px;
 }
 
 .admin-user-card {
     padding: 18px;
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    padding: 20px; /* Increased padding */
+    background: #fff;
+    border-radius: 18px; /* More rounded corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .admin-user-card-header {
@@ -386,11 +454,16 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    margin-bottom: 18px; /* More space */
+    border-bottom: 1px solid #eee; /* Separator */
+    padding-bottom: 15px;
     margin-bottom: 14px;
 }
 
 .admin-user-card-header strong {
     font-size: 16px;
+    font-size: 18px; /* Larger name */
+    color: #333;
 }
 
 .admin-user-card-header p {
@@ -399,21 +472,36 @@ body {
 }
 
 .admin-user-card-info {
+    gap: 12px; /* More gap */
+    font-size: 14px;
+    color: #555;
+}
+.admin-user-card-info {
     display: grid;
     gap: 10px;
     color: #444;
+    color: #6b3b3b;
     font-size: 14px;
 }
 
 .admin-user-card-actions {
     margin-top: 14px;
+    text-align: right;
 }
 
+.admin-user-card-actions {
+    margin-top: 20px;
+    text-align: right; /* Align button to the right */
+}
 .admin-user-card-actions button {
     padding: 8px 12px;
     border: none;
     border-radius: 8px;
     background: #d9534f;
+    padding: 10px 18px; /* Larger button */
+    border-radius: 10px; /* More rounded button */
+    font-weight: bold;
+    background: #e74c3c; /* Red for delete */
     color: white;
     cursor: pointer;
     transition: background 0.2s ease;
@@ -421,6 +509,7 @@ body {
 
 .admin-user-card-actions button:hover {
     background: #c9302c;
+    background: #c0392b;
 }
 
 .modal {
@@ -485,6 +574,15 @@ body {
 .modal-author {
     color: gray;
     margin: 0 0 10px 0;
+}
+
+.modal-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 20px 0;
+    font-size: 13px;
+    color: gray;
 }
 
 .modal-rating {
@@ -1034,6 +1132,19 @@ body {
     overflow-y: auto;
 }
 
+
+body.favorites-open {
+    overflow: hidden;
+}
+
+body.favorites-open .ad-slider {
+    display: none;
+}
+
+body.favorites-open .header-bottom {
+    display: none;
+}
+
 .footer {
     background: #ffffff;
     padding: 70px 30px 40px;
@@ -1152,4 +1263,95 @@ body.modal-open-book .main,
 body.modal-open-book .ad-slider,
 body.modal-open-book .footer {
     display: none;
+}
+
+.admin-books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.admin-book-stat-card {
+    display: flex;
+    gap: 15px;
+    align-items: center; /* Vertically align items */
+    gap: 20px; /* More gap */
+    background: #fff;
+    padding: 15px;
+    padding: 20px; /* Increased padding */
+    border-radius: 18px; /* More rounded corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.admin-book-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.admin-book-stat-img img {
+    width: 70px;
+    height: 100px;
+    width: 80px; /* Slightly larger image */
+    height: 120px; /* Maintain aspect ratio */
+    object-fit: cover;
+    border-radius: 6px;
+    border-radius: 8px; /* More rounded image corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Small shadow for image */
+}
+
+.fav-indicator {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b3b3b;
+    font-size: 14px;
+    margin-top: 0; /* Adjust margin */
+    font-size: 15px; /* Larger text */
+    font-weight: bold;
+}
+
+.fav-indicator svg {
+    fill: #6b3b3b; /* Ensure heart is filled */
+    width: 20px; /* Larger heart icon */
+    height: 20px;
+}
+
+/* Стиль для кружечка з кількістю вподобань (для адміна) */
+.fav-count-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #6b3b3b;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border: 2px solid white;
+}
+
+/* Navigation in admin.html header-bottom */
+.header-bottom a {
+    padding: 8px 15px; /* Add padding to make links more clickable */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header-bottom a.active-admin-nav {
+    background-color: #6b3b3b;
+    color: white;
+}
+
+.header-bottom a.active-admin-nav:hover {
+    background-color: #5a2f2f; /* Darker hover for active */
 }
