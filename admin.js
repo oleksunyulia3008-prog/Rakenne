@@ -119,15 +119,17 @@ async function initAdmin() {
                 const count = bookFavsCount[String(book.id)] || 0;
                 const card = document.createElement("div");
                 card.className = "admin-book-stat-card";
+                const price = typeof book.price === 'number' ? book.price : 0;
                 card.innerHTML = `
                     <div class="admin-book-stat-info">
                         <strong>${book.title}</strong>
-                        <p>${book.author}ndicator">
+                        <p>${book.author} | <small>${book.category || 'other'}</small></p>
+                        <div class="fav-indicator">
                             <svg viewBox="0 0 24 24" fill="#6b3b3b" width="18">
                                 <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
                             </svg>
                             <span>Favorites: <b>${count}</b></span>
-                            <span style="margin-left: 15px;">Price: <b>$${(book.price || 0).toFixed(2)}</b></span>
+                            <span style="margin-left: 15px; color: #444;">Price: <b>$${price.toFixed(2)}</b></span>
                         </div>
                     </div>
                     <div class="admin-book-actions">
