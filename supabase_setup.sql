@@ -5,6 +5,7 @@ CREATE TABLE books (
     img TEXT,
     rating REAL DEFAULT 0,
     votes INTEGER DEFAULT 0,
+    price REAL DEFAULT 0,
     category TEXT DEFAULT 'other'
 );
 
