@@ -36,17 +36,16 @@ function goBack() {
 }
 
 function showSection(sectionName) {
-    // Hide all sections first
+   
     document.querySelectorAll('.admin-section').forEach(section => {
         section.style.display = 'none';
     });
-    // Show the requested section
+  
     const targetSection = document.getElementById(`${sectionName}Section`);
     if (targetSection) {
         targetSection.style.display = 'block';
     }
 
-    // Update active class for navigation links
     document.querySelectorAll('.header-bottom a').forEach(link => {
         link.classList.remove('active-admin-nav');
     });
@@ -58,7 +57,7 @@ function showSection(sectionName) {
 
 async function initAdmin() {
     const { data } = await supabase.auth.getSession();
-    const user = data?.session?.user ?? loadAdminSession(); // Завантажуємо сесію або локального адміна
+    const user = data?.session?.user ?? loadAdminSession();
     if (!user || user.email !== ADMIN_EMAIL) {
         window.location.href = "index.html";
         return;
@@ -71,10 +70,8 @@ async function initAdmin() {
     if (usersListElement) usersListElement.innerHTML = "<p>Loading users...</p>";
     if (booksListElement) booksListElement.innerHTML = "<p>Loading analytics...</p>";
 
-    // Set default view to users and highlight the link
     showSection('users');
 
-    // Fetch all necessary data
     const { data: profiles, error: profileErr } = await supabase.from("profiles").select("*").order("email", { ascending: true });
     const { data: books, error: bookErr } = await supabase.from("books").select("*");
     const { data: favorites, error: favErr } = await supabase.from("favorites").select("user_id, book_id");
@@ -84,7 +81,6 @@ async function initAdmin() {
         return;
     }
 
-    // Calculate statistics
     const userFavsCount = (favorites || []).reduce((acc, fav) => {
         const userId = String(fav.user_id);
         acc[userId] = (acc[userId] || 0) + 1;
@@ -140,7 +136,6 @@ async function initAdmin() {
         usersListElement.appendChild(card);
     });
 
-    // Render Books Analytics
     if (booksListElement) {
         booksListElement.innerHTML = "";
         if (!books || books.length === 0) {
@@ -204,8 +199,7 @@ async function deleteUser(userId) {
     }
 
     alert("User deleted successfully.");
-    await initAdmin(); // Перезавантажуємо адмін-панель
-}
+    await initAdmin(); 
 
 async function logout() {
     await supabase.auth.signOut();
@@ -216,5 +210,6 @@ async function logout() {
 window.logout = logout;
 window.goBack = goBack;
 window.showSection = showSection;
-window.deleteUser = deleteUser; // Зробити доступною глобально для кнопки
+window.deleteUser = deleteUser; 
 window.addEventListener("DOMContentLoaded", initAdmin);
+}
