@@ -1,4 +1,5 @@
 import { supabase } from "./supabaseClient.js";
+import { formatDate, getRegisterErrorMessage, storageHelper, ADMIN_EMAIL, ADMIN_USER_ID } from "./helpers.js";
 
 const fallbackBooks = [
     { id: "book-1", title: "Haunting Adeline", author: "Hayley Dee Carlton", img: "images/book1.jpg", category: "bestseller", price: 13.50 },
@@ -97,9 +98,7 @@ const fallbackAllBooks = [
 
 const defaultBookImage = "images/book.jpg"; 
 
-const ADMIN_EMAIL = "admin@gmail.com";
 const ADMIN_PASSWORD = "admin123";
-const ADMIN_USER_ID = "admin-local";
 
 let currentUser = null;
 let favoriteBookIds = [];
@@ -171,7 +170,7 @@ function renderBooks(list, containerSelector) {
 }
 
 function categorizeBooks(bookArray) {
-    books = bookArray.filter((book) => book.category === "bestseller");
+    books = [];
     categories = {
         novelty: [],
         fiction: [],
@@ -184,27 +183,17 @@ function categorizeBooks(bookArray) {
     };
 
     bookArray.forEach((book) => {
-        switch ((book.category || "").toLowerCase()) {
-    case "novelty":
-        categories.novelty.push(book);
-        break;
-
-    case "fiction":
-        categories.fiction.push(book);
-        break;
-
-    case "mystery-thriller":
-        categories.mysterythriller.push(book);
-        break;
-
-    case "romance":
-        categories.romance.push(book);
-        break;
-
-    case "fantasy":
-        categories.fantasy.push(book);
-        break;
-}
+        const cat = (book.category || "").toLowerCase();
+        if (cat === "bestseller") {
+            books.push(book);
+        } else {
+            const key = cat.replace("-", ""); 
+            if (categories[key]) {
+                categories[key].push(book);
+            } else {
+                categories.other.push(book);
+            }
+        }
     });
 
     console.log("Categorized books:", {
@@ -321,7 +310,11 @@ function renderFavoritesPage() {
 
         card.innerHTML = `
             <div class="book-image">
-                <img src="${imageUrl}" />
+                <img 
+                    src="${imageUrl}" 
+                    alt="${book.title}"
+                    onerror="this.onerror=null;this.src='${defaultBookImage}';"
+                >
             </div>
             <div class="book-title">${book.title}</div>
             <div class="book-author">${book.author}</div>
@@ -349,18 +342,11 @@ function showHomePage() {
 
 function handleAdminClick(event) {
     event.preventDefault();
-    showAdminPanel();
+    window.location.href = "admin.html";
 }
 
 async function showAdminPanel() {
-    const isAdmin = currentUser?.email === "admin@gmail.com";
-    if (!isAdmin) {
-        openAuth("Admin login required", "login");
-        return;
-    }
-    await loadAdminPanel();
-    const modal = document.getElementById("adminModal");
-    if (modal) modal.style.display = "block";
+    window.location.href = "admin.html";
 }
 
 function closeAdminPanel() {
@@ -528,6 +514,36 @@ function handleSearch(query) {
     filterAndRender(categories.mysterythriller, ".mystery-thriller-row", "mystery-sec");
     filterAndRender(categories.romance, ".romance-row", "romance-sec");
     filterAndRender(categories.fantasy, ".fantasy-row", "fantasy-sec");
+}
+
+function initSlider() {
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.querySelector('.dots');
+    if (!slides.length || !dotsContainer) return;
+
+    let currentSlide = 0;
+
+    // Створюємо крапки для навігації
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    setInterval(() => {
+        goToSlide(currentSlide + 1);
+    }, 5000);
 }
 
 function openModal(book) {
@@ -835,14 +851,15 @@ async function login() {
     });
 
     if (error) {
-        if (messageNode) messageNode.textContent = error.message;
+        if (messageNode) {
+            if (error.message.includes("Email not confirmed")) {
+                messageNode.textContent = "Confirm your email or contact the administrator.";
+            } else {
+                messageNode.textContent = error.message;
+            }
+        }
         return;
     }
-
-    if (error.message.includes("Email not confirmed")) {
-    messageNode.textContent = "Confirm your email or contact the administrator.";
-    return;
-}
 
     currentUser = data.user;
     if (currentUser?.email?.toLowerCase() === ADMIN_EMAIL) {
@@ -894,18 +911,6 @@ async function createProfile(userId, name, username, email) {
     return true;
 }
 
-function getRegisterErrorMessage(error) {
-    if (!error || !error.message) return "Registration failed. Please try again.";
-    const text = error.message.toLowerCase();
-    if (text.includes("rate limit") || text.includes("email rate limit")) {
-        return "There is a temporary delay in registration. Try logging in via Login or wait a few minutes.";
-    }
-    if (text.includes("already registered") || text.includes("already exists") || text.includes("duplicate")) {
-        return "This email is already registered. Try logging in via Login.";
-    }
-    return error.message;
-}
-
 async function register() {
     const name = document.getElementById("regName")?.value.trim();
     const username = document.getElementById("regUsername")?.value.trim();
@@ -953,29 +958,9 @@ async function register() {
     switchTab("login");
 }
 
-function saveAdminSession() {
-    if (!window.localStorage) return;
-    localStorage.setItem("adminSession", "true");
-}
-
-function loadAdminSession() {
-    if (!window.localStorage) return null;
-    const isAdmin = localStorage.getItem("adminSession") === "true";
-    if (!isAdmin) return null;
-    return {
-        id: ADMIN_USER_ID,
-        email: ADMIN_EMAIL,
-        user_metadata: {
-            name: "Admin",
-            username: "admin"
-        }
-    };
-}
-
-function clearAdminSession() {
-    if (!window.localStorage) return;
-    localStorage.removeItem("adminSession");
-}
+const saveAdminSession = storageHelper.saveAdminSession;
+const loadAdminSession = storageHelper.loadAdminSession;
+const clearAdminSession = storageHelper.clearAdminSession;
 
 async function getProfileByEmail(email) {
     const { data, error } = await supabase
@@ -1006,10 +991,6 @@ function switchTab(tab) {
 }
 
 async function showUsers() {
-    if (!currentUser || currentUser.email !== "admin@gmail.com") {
-        openAuth("Admin login required");
-        return;
-    }
     window.location.href = "admin.html";
 }
 
@@ -1099,6 +1080,7 @@ async function init() {
         if (currentUser.email === ADMIN_EMAIL) await loadAllFavoriteCounts();
     }
     renderAll();
+    initSlider();
     updateUI();
 
     const searchInput = document.getElementById("searchInput");
