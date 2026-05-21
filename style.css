@@ -166,12 +166,11 @@ body {
 
 .background-title {
     position: absolute;
-    top: 30px;               
-    top: 10px;               
+    top: 10px;
     left: 50%;
-    transform: translate(-50%);
+    transform: translateX(-50%);
 
-    font-size: 120px;
+    font-size: 90px;
     color: black;
     opacity: 0.05;
     pointer-events: none;
@@ -188,11 +187,10 @@ body {
 
 .section .background-title {
     position: absolute;
-    top: 40px;
-    top: 20px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 120px;
+    font-size: 70px;
     opacity: 0.05;
     z-index: 1;
 }
@@ -255,7 +253,7 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     padding-top: 120px; 
-    padding-top: 40px; /* Зменшено, щоб книги було видно краще */
+    padding-top: 80px; /* Вирівняно з висотою в Novelty */
 }
 
 .books-row::-webkit-scrollbar {
