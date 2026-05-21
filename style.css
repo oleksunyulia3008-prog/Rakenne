@@ -140,7 +140,7 @@ body {
 }
 
 .dropdown-menu a::after {
-    display: none; /* Прибираємо лінію підкреслення для пунктів меню */
+    display: none; 
 }
 
 .dropdown-menu a:hover {
@@ -164,15 +164,15 @@ body {
     margin-top: 60px;
 }
 
-.background-title {
+#bestsellers-sec .background-title {
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
 
-    font-size: 90px;
+    font-size: 80px;
     color: black;
-    opacity: 0.05;
+    opacity: 0.04;
     pointer-events: none;
     z-index: 1;
 }
@@ -253,7 +253,7 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     padding-top: 120px; 
-    padding-top: 80px; /* Вирівняно з висотою в Novelty */
+    padding-top: 80px; 
 }
 
 .books-row::-webkit-scrollbar {
@@ -357,12 +357,12 @@ body {
     margin-bottom: 20px;
     padding: 16px;
     background: #fff;
-    padding: 40px; /* Increased padding for better spacing */
-    max-width: 1200px; /* Max width for content readability */
-    margin: 20px auto; /* Center the content */
-    background: #ffffff; /* White background for the main content area */
+    padding: 40px; 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    background: #ffffff; 
     border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* More prominent shadow */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     border-radius: 14px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
@@ -372,18 +372,18 @@ body {
     color: #333;
       font-size: 15px;
     color: #444;
-    flex: 1; /* Allow items to grow */
-    min-width: 180px; /* Minimum width for wrapping */
+    flex: 1;
+    min-width: 180px;
     text-align: center;
 }
 
 .admin-panel-header {
-    text-align: center; /* Center the header text */
-    margin-bottom: 40px; /* More space below header */
+    text-align: center; 
+    margin-bottom: 40px;
 }
 
 .admin-panel-header h1 {
-    font-size: 2.5em; /* Larger main title */
+    font-size: 2.5em;
     color: #333;
     margin-bottom: 10px;
 }
@@ -396,29 +396,29 @@ body {
 }
 
 .admin-info {
-    margin-bottom: 30px; /* Increased margin */
-    padding: 20px; /* Increased padding */
-    background: #f9f9f9; /* Slightly off-white background */
+    margin-bottom: 30px; 
+    padding: 20px;
+    background: #f9f9f9;
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Softer shadow */
-    display: flex; /* Use flexbox for info rows */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); 
+    display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Space between info items */
+    gap: 20px;
     justify-content: space-around;
 }
 
 .admin-info-row strong {
-    color: #6b3b3b; /* Highlight strong text */
+    color: #6b3b3b; 
 }
 
 .admin-section {
-    margin-top: 40px; /* Space between sections */
+    margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid #eee; /* Separator line */
+    border-top: 1px solid #eee; 
 }
 
-.admin-section h2.section-title { /* Added class for specific styling */
-    font-size: 2em; /* Section titles */
+.admin-section h2.section-title { 
+    font-size: 2em;
     color: #333;
     margin-bottom: 25px;
     text-align: center;
@@ -427,7 +427,7 @@ body {
 .users-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider cards */
+     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
     gap: 25px; 
     gap: 20px;
 }
@@ -435,10 +435,10 @@ body {
 .admin-user-card {
     padding: 18px;
     background: rgba(255, 255, 255, 0.9);
-    padding: 20px; /* Increased padding */
+    padding: 20px;
     background: #fff;
-    border-radius: 18px; /* More rounded corners */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -452,15 +452,15 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 18px; /* More space */
-    border-bottom: 1px solid #eee; /* Separator */
+    margin-bottom: 18px;
+    border-bottom: 1px solid #eee; 
     padding-bottom: 15px;
     margin-bottom: 14px;
 }
 
 .admin-user-card-header strong {
     font-size: 16px;
-    font-size: 18px; /* Larger name */
+    font-size: 18px;
     color: #333;
 }
 
@@ -470,7 +470,7 @@ body {
 }
 
 .admin-user-card-info {
-    gap: 12px; /* More gap */
+    gap: 12px;
     font-size: 14px;
     color: #555;
 }
@@ -489,17 +489,17 @@ body {
 
 .admin-user-card-actions {
     margin-top: 20px;
-    text-align: right; /* Align button to the right */
+    text-align: right;
 }
 .admin-user-card-actions button {
     padding: 8px 12px;
     border: none;
     border-radius: 8px;
     background: #d9534f;
-    padding: 10px 18px; /* Larger button */
-    border-radius: 10px; /* More rounded button */
+    padding: 10px 18px;
+    border-radius: 10px;
     font-weight: bold;
-    background: #e74c3c; /* Red for delete */
+    background: #e74c3c; 
     color: white;
     cursor: pointer;
     transition: background 0.2s ease;
@@ -590,7 +590,7 @@ body {
 
 .close-btn {
     position: fixed;
-    top: 120px; /* Трохи нижче, щоб не перекривати меню */
+    top: 120px;
     right: 40px;
     z-index: 3000;
     cursor: pointer;
@@ -632,15 +632,15 @@ body {
 }
 
 .favorites-modal {
-    position: fixed; /* Keep fixed */
-    top: 102px; /* Вирівняно під висоту меню (58px + 44px) */
+    position: fixed; 
+    top: 102px; 
     left: 0;
     width: 100%;
     height: calc(100vh - 102px);
-    background: #ebebeb; /* Consistent background with book modal */
+    background: #ebebeb;
     display: none;
     padding: 40px;
-    z-index: 2001; /* Ensure it's above main content but below header */
+    z-index: 2001;
 }
 
 .favorites-modal .modal-box {
@@ -662,8 +662,7 @@ body {
 }
 
 .favorites-modal .close-btn {
-    /* Ensure the close button for favorites modal uses the general .close-btn styling */
-    position: fixed; /* Override any absolute positioning from .modal-box */
+    position: fixed;
 }
 
 .favorites-books-row {
@@ -836,14 +835,14 @@ body {
     padding: 10px;
     border-radius: 8px;
     border: none;
-    background: #6b3b3b; /* як серце */
+    background: #6b3b3b; 
     color: white;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .auth-box button:hover {
-    background: #ccc; /* сірий при наведенні */
+    background: #ccc; 
     color: black;
 }
 
@@ -969,11 +968,11 @@ body {
 
 .ad-slider {
     position: relative;
-    width: 95%; /* Залишаємо трохи місця по боках */
-    max-width: 1400px; /* Обмежуємо максимальну ширину */
-    height: 550px; /* Збільшено висоту */
+    width: 95%;
+    max-width: 1400px;
+    height: 550px;
     overflow: hidden;
-    margin: 20px auto; /* Опускаємо нижче меню та центруємо */
+    margin: 20px auto;
     padding: 0;
     border-radius: 15px;
 }
@@ -1003,7 +1002,6 @@ body {
     object-fit: cover;
 }
 
-/* кнопки */
 .nav {
     position: absolute;
     top: 50%;
@@ -1020,7 +1018,6 @@ body {
 .prev { left: 20px; }
 .next { right: 20px; }
 
-/* точки */
 .dots {
     position: absolute;
     bottom: 15px;
@@ -1058,7 +1055,7 @@ body {
 }
 
 .menu-item:hover {
-    color: #6b3b3b; /* як серце */
+    color: #6b3b3b; 
 }
 
 .dropdown {
@@ -1108,21 +1105,21 @@ body {
 
 .header-top,
 .header-bottom {
-    position: relative; /* Keep relative or fixed/sticky if needed */
-    z-index: 2002; /* Ensure header is above the modal */
+    position: relative;
+    z-index: 2002;
 }
 
 .modal {
     position: fixed;
-    top: 102px; /* Починається точно під меню */
+    top: 102px; 
     left: 0;
     width: 100%;
     height: calc(100vh - 102px);
     background: #ebebeb;
     display: none;
     padding: 40px;
-    z-index: 2001; /* Забезпечуємо, що модальні вікна знаходяться над заголовком */
-    overflow-y: auto; /* Дозволяємо прокрутку всього вікна */
+    z-index: 2001; 
+    overflow-y: auto; 
 }
 
 .modal-content {
@@ -1253,7 +1250,7 @@ body.modal-open-book .header-top {
 }
 body.modal-open-book .header-bottom {
     position: fixed;
-    top: 58px; /* Висота header-top */
+    top: 58px; 
     width: 100%;
     z-index: 2004;
 }
@@ -1273,12 +1270,12 @@ body.modal-open-book .footer {
 .admin-book-stat-card {
     display: flex;
     gap: 15px;
-    align-items: center; /* Vertically align items */
-    gap: 20px; /* More gap */
+    align-items: center; 
+    gap: 20px;
     background: #fff;
     padding: 15px;
-    padding: 20px; /* Increased padding */
-    border-radius: 18px; /* More rounded corners */
+    padding: 20px;
+    border-radius: 18px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     border-radius: 12px;
@@ -1293,12 +1290,12 @@ body.modal-open-book .footer {
 .admin-book-stat-img img {
     width: 70px;
     height: 100px;
-    width: 80px; /* Slightly larger image */
-    height: 120px; /* Maintain aspect ratio */
+    width: 80px;
+    height: 120px;
     object-fit: cover;
     border-radius: 6px;
-    border-radius: 8px; /* More rounded image corners */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Small shadow for image */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .fav-indicator {
@@ -1308,18 +1305,17 @@ body.modal-open-book .footer {
     gap: 8px;
     color: #6b3b3b;
     font-size: 14px;
-    margin-top: 0; /* Adjust margin */
-    font-size: 15px; /* Larger text */
+    margin-top: 0; 
+    font-size: 15px; 
     font-weight: bold;
 }
 
 .fav-indicator svg {
-    fill: #6b3b3b; /* Ensure heart is filled */
-    width: 20px; /* Larger heart icon */
+    fill: #6b3b3b; 
+    width: 20px; 
     height: 20px;
 }
 
-/* Стиль для кружечка з кількістю вподобань (для адміна) */
 .fav-count-badge {
     position: absolute;
     top: 8px;
@@ -1338,9 +1334,8 @@ body.modal-open-book .footer {
     border: 2px solid white;
 }
 
-/* Navigation in admin.html header-bottom */
 .header-bottom a {
-    padding: 8px 15px; /* Add padding to make links more clickable */
+    padding: 8px 15px;
     border-radius: 8px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -1351,5 +1346,5 @@ body.modal-open-book .footer {
 }
 
 .header-bottom a.active-admin-nav:hover {
-    background-color: #5a2f2f; /* Darker hover for active */
+    background-color: #5a2f2f; 
 }
