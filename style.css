@@ -314,22 +314,6 @@ body {
     fill: white;
 }
 
-.rating {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    color: #6b3b3b;
-}
-
-.star {
-    font-size: 18px;
-}
-
-.rating-text {
-    font-size: 11px;
-    color: gray;
-}
-
 .book-title {
     margin-top: 10px;
     font-weight: bold;
@@ -956,16 +940,6 @@ body {
 .prev { left: 20px; }
 .next { right: 20px; }
 
-.stars {
-    color: #6b3b3b;
-    font-size: 16px;
-}
-
-.rating-text {
-    font-size: 11px;
-    color: gray;
-}
-
 .ad-slider {
     position: relative;
     width: 95%;
@@ -1347,4 +1321,23 @@ body.modal-open-book .footer {
 
 .header-bottom a.active-admin-nav:hover {
     background-color: #5a2f2f; 
+}
+
+.admin-book-actions {
+    margin-left: auto;
+}
+
+.edit-book-btn {
+    background: #f4eab8;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.edit-book-btn:hover {
+    background: #6b3b3b;
+    color: white;
 }
