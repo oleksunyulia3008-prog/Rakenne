@@ -730,6 +730,12 @@ async function toggleFavorite(btn) {
 
     await loadFavorites();
     renderAll();
+
+    // Оновлюємо вміст модального вікна обраного, якщо воно відкрите
+    const favoritesModal = document.getElementById("favoritesModal");
+    if (favoritesModal && favoritesModal.style.display === "block") {
+        renderFavoritesModalContent();
+    }
 }
 
 function showFavoritesModal() {
@@ -739,15 +745,22 @@ function showFavoritesModal() {
     }
 
     const modal = document.getElementById("favoritesModal");
-    const container = document.querySelector(".favorites-books-row");
-    const messageNode = document.querySelector(".favorites-modal-message");
-    if (!modal || !container || !messageNode) return;
+    if (!modal) return;
 
-    const favoriteBooks = getAllBooks().filter((book) => favoriteBookIds.includes(String(book.id)));
-    container.innerHTML = "";
     modal.style.display = "block";
     document.body.classList.add('modal-open-book'); // Add class to body to hide main content
     document.body.style.overflow = "hidden"; // Disable background scrolling
+
+    renderFavoritesModalContent();
+}
+
+function renderFavoritesModalContent() {
+    const container = document.querySelector(".favorites-books-row");
+    const messageNode = document.querySelector(".favorites-modal-message");
+    if (!container || !messageNode) return;
+
+    const favoriteBooks = getAllBooks().filter((book) => favoriteBookIds.includes(String(book.id)));
+    container.innerHTML = "";
 
     if (favoriteBooks.length === 0) {
         messageNode.textContent = "No favorites yet. Add a book by clicking the heart icon.";
@@ -760,25 +773,23 @@ function showFavoritesModal() {
         const card = document.createElement("div");
         card.className = "book-card";
         const imageUrl = book.img ? String(book.img) : defaultBookImage;
-        const isFavorite = favoriteBookIds.includes(String(book.id));
         card.innerHTML = `
-        <div class="book-image">
-    <img 
-        src="${imageUrl}" 
-        alt="${book.title}"
-        onerror="this.onerror=null;this.src='${defaultBookImage}';"
-    >
-
-    <button 
-        class="heart-btn ${isFavorite ? "active" : ""}"
-        data-book-id="${book.id}"
-        onclick="event.stopPropagation(); toggleFavorite(this)"
-    >
-        <svg viewBox="0 0 24 24">
-            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
-        </svg>
-    </button>
-</div>
+            <div class="book-image">
+                <img 
+                    src="${imageUrl}" 
+                    alt="${book.title}"
+                    onerror="this.onerror=null;this.src='${defaultBookImage}';"
+                >
+                <button 
+                    class="heart-btn active"
+                    data-book-id="${book.id}"
+                    onclick="event.stopPropagation(); toggleFavorite(this)"
+                >
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+                    </svg>
+                </button>
+            </div>
             <div class="book-title">${book.title}</div>
             <div class="book-author">${book.author}</div>
         `;
