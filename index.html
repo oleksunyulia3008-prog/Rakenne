@@ -70,7 +70,7 @@
 
     <div id="authBtn" onclick="openAuth()">Authorization</div>
 
-    <div class="icon heart-top" onclick="showFavoritesModal()">
+    <div class="icon heart-top" title="Favorites" onclick="showFavoritesModal()">
                 <svg viewBox="0 0 24 24" stroke-width="2">
                     <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
                 </svg>
@@ -117,7 +117,7 @@
                 <a href="#" onclick="scrollToSection('fantasy-sec')">Fantasy</a>
             </div>
         </div>
-        <a href="#" id="usersBtn" style="display:none;" onclick="showUsers()">Users</a> 
+        <a href="#" id="usersBtn" style="display:none;" onclick="handleAdminClick(event)">Users</a> 
     </div>
 
     <div class="ad-slider">
