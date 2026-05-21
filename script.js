@@ -95,7 +95,7 @@ const fallbackAllBooks = [
     ...fallbackFantasyBooks
 ];
 
-const defaultBookImage = "images/book.jpg"; // Це зображення-замінник, його залишаємо як є.
+const defaultBookImage = "images/book.jpg"; 
 
 const ADMIN_EMAIL = "admin@gmail.com";
 const ADMIN_PASSWORD = "admin123";
@@ -104,8 +104,8 @@ const ADMIN_USER_ID = "admin-local";
 let currentUser = null;
 let favoriteBookIds = [];
 let books = [];
-let bookFavoriteCounts = {}; // Кількість додавань в обране для адміна
-let salesChartInstance = null; // Для зберігання екземпляра графіка
+let bookFavoriteCounts = {}; 
+let salesChartInstance = null; 
 
 let categories = {
     novelty: [],
@@ -279,7 +279,6 @@ async function loadFavorites() {
     favoriteBookIds = (data || []).map((item) => String(item.book_id));
 }
 
-// Завантаження статистики всіх вподобань для адміна
 async function loadAllFavoriteCounts() {
     if (currentUser?.email !== ADMIN_EMAIL) {
         bookFavoriteCounts = {};
@@ -487,7 +486,6 @@ function renderAll() {
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
-        // Офсет (110px) потрібен, щоб верхнє меню не закривало заголовок розділу
         const offset = 110;
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
         const offsetPosition = elementPosition - offset;
@@ -504,14 +502,12 @@ function handleSearch(query) {
     const slider = document.querySelector('.ad-slider');
     
     if (!q) {
-        // Повертаємо все до початкового стану, якщо пошуковий запит порожній
         if (slider) slider.style.display = 'block';
         document.querySelectorAll('.section').forEach(s => s.style.display = 'block');
         renderAll();
         return;
     }
 
-    // Приховуємо слайдер під час пошуку
     if (slider) slider.style.display = 'none';
 
     const filterAndRender = (list, selector, sectionId) => {
@@ -556,11 +552,10 @@ function openModal(book) {
         price.textContent = `Price: $${(book.price || 11.25).toFixed(2)}`;
     }
 
-    // Викликаємо функцію для малювання професійного графіка
     renderSalesChart();
 
     modal.style.display = "block";
-    document.body.style.overflow = "hidden"; // Disable background scrolling
+    document.body.style.overflow = "hidden"; 
     document.body.classList.add('modal-open-book');
     renderSalesChart();
 }
@@ -571,7 +566,6 @@ function renderSalesChart() {
     
     const ctx = canvas.getContext('2d');
     
-    // Якщо графік уже існує, видаляємо його перед створенням нового
     if (salesChartInstance) {
         salesChartInstance.destroy();
     }
@@ -585,9 +579,9 @@ function renderSalesChart() {
                 data: Array.from({ length: 6 }, () => Math.floor(Math.random() * 50) + 10),
                 backgroundColor: 'rgba(107, 59, 59, 0.2)',
                 borderColor: 'rgba(107, 59, 59, 1)',
-                borderWidth: 2, // Thicker line
-                fill: true, // Fill the area under the line
-                tension: 0.4 // Smooth curves
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4 
             }]
         },
         options: {
@@ -612,7 +606,7 @@ function renderSalesChart() {
 function closeModal() {
     const modal = document.getElementById("modal");
     if (modal) modal.style.display = "none";
-    document.body.style.overflow = "auto"; // Re-enable scrolling
+    document.body.style.overflow = "auto";
     document.body.classList.remove('modal-open-book');
 }
 
@@ -731,7 +725,6 @@ async function toggleFavorite(btn) {
     await loadFavorites();
     renderAll();
 
-    // Оновлюємо вміст модального вікна обраного, якщо воно відкрите
     const favoritesModal = document.getElementById("favoritesModal");
     if (favoritesModal && favoritesModal.style.display === "block") {
         renderFavoritesModalContent();
@@ -748,8 +741,8 @@ function showFavoritesModal() {
     if (!modal) return;
 
     modal.style.display = "block";
-    document.body.classList.add('modal-open-book'); // Add class to body to hide main content
-    document.body.style.overflow = "hidden"; // Disable background scrolling
+    document.body.classList.add('modal-open-book');
+    document.body.style.overflow = "hidden"; 
 
     renderFavoritesModalContent();
 }
@@ -803,8 +796,8 @@ function closeFavoritesModal() {
     if (modal) {
         modal.style.display = "none";
     }
-    document.body.classList.remove('modal-open-book'); // Remove class from body
-    document.body.style.overflow = "auto"; // Re-enable scrolling
+    document.body.classList.remove('modal-open-book'); 
+    document.body.style.overflow = "auto"; 
 }
 
 async function login() {
