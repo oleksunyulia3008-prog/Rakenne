@@ -1228,11 +1228,6 @@ body.modal-open-book .header-bottom {
     width: 100%;
     z-index: 2004;
 }
-body.modal-open-book .main,
-body.modal-open-book .ad-slider,
-body.modal-open-book .footer {
-    display: none;
-}
 
 .admin-books-grid {
     display: grid;
