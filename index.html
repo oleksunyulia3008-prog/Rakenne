@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Стилі для плавного переходу (fade) та коректного відображення */
+       
         .ad-slider {
             position: relative;
             width: 100%;
-            height: 550px; /* Збільшено висоту для повного відображення фото */
-            margin: 20px auto; /* Центруємо та додаємо відступ зверху */
+            height: 550px; 
+            margin: 20px auto;
             overflow: hidden;
             border-radius: 15px;
             z-index: 1;
@@ -30,7 +30,7 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Швидкість появи фото */
+            transition: opacity 1.5s ease-in-out; 
             z-index: 1;
         }
 
@@ -42,15 +42,14 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Фото заповнює блок, не деформуючись */
+            object-fit: cover; 
         }
 
-        /* Щоб меню було зверху і не наповзало на контент */
         .header-top, .header-bottom {
             position: relative;
             z-index: 2000;
             background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Додаємо легку тінь для візуального розділення */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
             display: flex;
         }
     </style>
@@ -118,7 +117,7 @@
                 <a href="#" onclick="scrollToSection('fantasy-sec')">Fantasy</a>
             </div>
         </div>
-        <a href="#" id="usersBtn" style="display:none;" onclick="showUsers()">Users</a> <!-- Виправлено: тепер викликає showUsers() -->
+        <a href="#" id="usersBtn" style="display:none;" onclick="showUsers()">Users</a> 
     </div>
 
     <div class="ad-slider">
@@ -177,7 +176,7 @@
             <div class="close-btn" onclick="closeModal()">✖</div>
             <div class="modal-content">
                 <div class="modal-left">
-                    <img src="images/book.jpg" alt="book"> <!-- Використовуємо defaultBookImage -->
+                    <img src="images/book.jpg" alt="book">
                 </div>
                 <div class="modal-right">
                     <h2 class="modal-title"></h2>
@@ -224,7 +223,6 @@
     </div>
 </div>
 
-<!-- Favorites Modal -->
 <div class="modal favorites-modal" id="favoritesModal">
     <div class="modal-box">
         <div class="close-btn" onclick="closeFavoritesModal()">✖</div>
@@ -233,12 +231,11 @@
             <p class="favorites-modal-message"></p>
         </div>
         <div class="books-row favorites-books-row">
-            <!-- Favorite books will be rendered here -->
+          
         </div>
     </div>
 </div>
 
-<!-- Admin Modal (if it was intended to be a modal on index.html) -->
 <div class="modal" id="adminModal" style="display:none;">
     <div class="modal-box">
         <div class="close-btn" onclick="closeAdminPanel()">✖</div>
