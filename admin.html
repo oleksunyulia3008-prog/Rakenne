@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="header-top">
+        <div class="left-section">
+            <div class="logo">
+                <img src="images/logo.jpg" alt="rakenne">
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+        <div class="header-icons">
+            <a href="#" class="nav-link" onclick="goBack()">Back to Store</a>
+            <div id="logoutBtn" class="nav-link" onclick="logout()">Logout</div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <a href="#" id="adminNavUsers" onclick="showSection('users')">Users</a>
+        <a href="#" id="adminNavBooks" onclick="showSection('books')">Books Analytics</a>
+        <a href="#" id="adminNavContent" onclick="showSection('content')">Content</a>
+        <a href="#" id="adminNavAddBook" onclick="showSection('addBook')">Add Book</a>
+        <a href="#" id="adminNavCategories" onclick="showSection('categories')">Categories</a>
+        <a href="#" id="adminNavMedia" onclick="showSection('media')">Media</a>
+    </div>
+    <div class="main admin-page">
+        <div class="section">
+            <div class="background-title">Admin</div>
+            <div class="admin-panel-header">
+                <h1>Admin Panel</h1>
+                <p>Manage users and view book popularity statistics.</p>
+            </div>
+            <div id="adminInfo" class="admin-info"></div>
+            
+            <div id="usersSection" class="admin-section">
+                <h2 class="section-title">Registered Users</h2>
+                <div id="usersList" class="users-grid"></div>
+            </div>
+
+            <div id="contentSection" class="admin-section" style="display:none;">
+                <h2 class="section-title">Content Management</h2>
+                <p>Manage website content here.</p>
+            </div>
+            <div id="categoriesSection" class="admin-section" style="display:none;">
+                <h2 class="section-title">Category Management</h2>
+                <p>Manage book categories here.</p>
+            </div>
+            <div id="mediaSection" class="admin-section" style="display:none;">
+                <h2 class="section-title">Media Management</h2>
+                <p>Manage media files here.</p>
+            </div>
+
+            <div id="booksSection" class="admin-section" style="display:none;">
+                <h2 class="section-title">Books Analytics</h2>
+                <div id="adminBooksList" class="admin-books-grid"></div>
+            </div>
+
+            <div id="addBookSection" class="admin-section" style="display:none;">
+                <h2 class="section-title">Add New Book</h2>
+                <form id="addBookForm" onsubmit="event.preventDefault(); addNewBook();">
+                    <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                        <label>ID (e.g., book-21):</label>
+                        <input type="text" id="addBookId" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                    </div>
+                    <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                        <label>Title:</label>
+                        <input type="text" id="addBookTitle" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                    </div>
+                    <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                        <label>Author:</label>
+                        <input type="text" id="addBookAuthor" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                    </div>
+                    <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                        <label>Image URL:</label>
+                        <input type="text" id="addBookImg" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" placeholder="e.g., images/new_book.jpg">
+                    </div>
+                    <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                        <label>Category:</label>
+                        <input type="text" id="addBookCategory" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                    </div>
+                    <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                        <label>Price ($):</label>
+                        <input type="number" id="addBookPrice" step="0.01" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                    </div>
+                    <button type="submit" class="save-btn" style="background: #6b3b3b; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%;">Add Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Book Modal -->
+    <div id="editBookModal" class="modal" style="display:none;">
+        <div class="modal-box">
+            <div class="close-btn" onclick="closeEditBookModal()">✖</div>
+            <h2 class="section-title">Edit Book Details</h2>
+            <form id="editBookForm" onsubmit="event.preventDefault(); saveBookChanges();">
+                <input type="hidden" id="editBookId">
+                <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                    <label>Title:</label>
+                    <input type="text" id="editTitle" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                </div>
+                <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                    <label>Author:</label>
+                    <input type="text" id="editAuthor" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                </div>
+                <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                    <label>Image URL:</label>
+                    <input type="text" id="editImg" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                    <label>Price ($):</label>
+                    <input type="number" id="editPrice" step="0.01" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                </div>
+                <div class="admin-info-row" style="text-align: left; margin-bottom: 15px;">
+                    <label>Category:</label>
+                    <input type="text" id="editCategory" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc;" required>
+                </div>
+                <button type="submit" class="save-btn" style="background: #6b3b3b; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%;">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="./admin.js"></script>
+</body>
+</html>
