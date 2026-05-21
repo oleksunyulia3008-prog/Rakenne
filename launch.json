@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "rakenne",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "url": "http://localhost:9000",
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "Vite: dev",
+            "serverReadyAction": {
+                "pattern": "ready in",
+                "uriFormat": "http://localhost:9000",
+                "action": "openExternally"
+            }
+        }
+    ]
+}
